@@ -3,6 +3,10 @@ const {
 	title = "Osama Azab",
 	description = "Computer Science Student & Developer",
 } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -12,29 +16,41 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<link rel="stylesheet" href="/styles/global.css" />
-		<link rel="icon" href="/favicon.ico" />
 	</head>
-	<body>
-		<header class="bg-sky-900 text-white py-4 shadow">
+	<body class="bg-white text-gray-900 font-sans antialiased">
+		<!-- Header -->
+		<header class="bg-sky-900 text-white py-4 shadow-sm sticky top-0 z-50">
 			<nav class="max-w-6xl mx-auto flex justify-between items-center px-6">
-				<a href="/" class="text-xl font-bold">Osama Azab</a>
-				<ul class="flex gap-6 text-sm">
-					<li><a href="/" class="hover:text-sky-300">Home</a></li>
-					<li><a href="/projects" class="hover:text-sky-300">Projects</a></li>
-					<li><a href="/cv" class="hover:text-sky-300">CV</a></li>
-					<li><a href="/contact" class="hover:text-sky-300">Contact</a></li>
+				<a href="/" class="text-xl font-bold hover:text-sky-200 transition"
+					>Osama Azab</a
+				>
+				<ul class="flex flex-wrap gap-6 text-sm">
+					<li><a href="/" class="hover:text-sky-300 transition">Home</a></li>
+					<li>
+						<a href="/projects" class="hover:text-sky-300 transition"
+							>Projects</a
+						>
+					</li>
+					<li><a href="/cv" class="hover:text-sky-300 transition">CV</a></li>
+					<li>
+						<a href="/about" class="hover:text-sky-300 transition">About</a>
+					</li>
+					<li>
+						<a href="/contact" class="hover:text-sky-300 transition">Contact</a>
+					</li>
 				</ul>
 			</nav>
 		</header>
 
-		<main class="min-h-[calc(100vh-160px)]">
+		<!-- Main content -->
+		<main class="min-h-[calc(100vh-160px)] px-4 sm:px-6 lg:px-0">
 			<slot />
 		</main>
 
+		<!-- Footer -->
 		<footer class="bg-sky-900 text-white text-center py-6 mt-12">
 			<p class="text-sm">
-				&copy; {new Date().getFullYear()} Osama Azab. All rights reserved.
+				&copy; {currentYear} Osama Azab. All rights reserved.
 			</p>
 		</footer>
 	</body>

@@ -1,64 +1,66 @@
 ---
-// src/pages/about.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="About Me | Osama Azab">
-	<div class="container">
-		<section class="about-section">
-			<div class="about-content">
-				<h1>About Me</h1>
+	<section class="py-20 px-6">
+		<div class="max-w-5xl mx-auto text-center">
+			<h1 class="text-4xl font-extrabold mb-6">About Me</h1>
 
-				<div class="profile">
-					<div class="profile-image">
-						<img src="/images/profile-photo.jpg" alt="Osama Azab" />
-					</div>
-					<div class="profile-info">
-						<h2>Osama Azab</h2>
-						<p class="title">Computer Science Student & Developer</p>
-						<p class="location">Riyadh, Saudi Arabia</p>
-						<div class="contact-links">
-							<a href="mailto:gosamab@hotmail.com">gosamab@hotmail.com</a>
-							<a href="tel:+966534832267">+966 534 832 267</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="bio">
-					<p>
-						I'm a senior Computer Science student at Prince Sultan University
-						with a passion for solving complex problems through technology. My
-						academic journey has focused on artificial intelligence, data
-						engineering, and full-stack development, with a particular interest
-						in Arabic language processing and OCR technologies.
-					</p>
-
-					<p>
-						Throughout my studies, I've developed a strong foundation in
-						algorithms, databases, distributed systems, and artificial
-						intelligence. I enjoy applying these concepts to build practical
-						solutions that address real-world challenges, particularly in the
-						realm of Arabic language computing.
-					</p>
-				</div>
-
-				<h2>Education</h2>
-				<div class="education">
-					<div class="education-item">
-						<div class="edu-details">
-							<h3>BSc. in Computer Science</h3>
-							<p class="institution">Prince Sultan University</p>
-							<p class="date">Aug 2021 — Dec 2025 (Expected)</p>
-						</div>
-						<div class="edu-description">
-							<p>
-								<strong>Relevant Coursework:</strong> Design & Analysis of Algorithms,
-								Databases, Distributed Systems,
-							</p>
-						</div>
+			<!-- Profile Info -->
+			<div
+				class="flex flex-col md:flex-row items-center md:items-start gap-10 mb-10"
+			>
+				<img
+					src="/me.jpg"
+					alt="Osama Azab"
+					class="w-40 h-40 rounded-full object-cover"
+				/>
+				<div class="text-center md:text-left">
+					<h2 class="text-2xl font-bold">Osama Azab</h2>
+					<p class="text-sky-700 font-medium">Senior CS Student & Developer</p>
+					<p class="text-gray-600">Riyadh, Saudi Arabia</p>
+					<div class="mt-3 space-y-1 text-sm text-blue-600">
+						<a href="mailto:gosamab@hotmail.com" class="block hover:underline"
+							>gosamab@hotmail.com</a
+						>
+						<a href="tel:+966534832267" class="block hover:underline"
+							>+966 534 832 267</a
+						>
 					</div>
 				</div>
 			</div>
-		</section>
-	</div></BaseLayout
->
+
+			<!-- Bio -->
+			<div class="text-left space-y-6 text-gray-700 leading-relaxed">
+				<p>
+					I'm a senior Computer Science student at Prince Sultan University with
+					a passion for solving complex problems through technology. My academic
+					journey has focused on artificial intelligence, data engineering, and
+					full-stack development — especially in Arabic language processing and
+					OCR technologies.
+				</p>
+				<p>
+					I've built a strong foundation in algorithms, databases, distributed
+					systems, and machine learning. I enjoy applying these skills to
+					real-world problems, particularly in areas like Arabic OCR,
+					intelligent interfaces, and secure systems.
+				</p>
+			</div>
+
+			<!-- Education -->
+			<div class="mt-16 text-left">
+				<h2 class="text-2xl font-semibold mb-4">Education</h2>
+				<div class="bg-white shadow-sm rounded-lg p-6 border">
+					<h3 class="text-xl font-semibold">BSc. in Computer Science</h3>
+					<p class="text-gray-600">Prince Sultan University</p>
+					<p class="text-sm text-gray-500">Aug 2021 — Dec 2025 (Expected)</p>
+					<p class="mt-2 text-sm text-gray-700">
+						<strong>Relevant Coursework:</strong> Design & Analysis of Algorithms,
+						Database Systems, Distributed Systems, Data Science, NLP, Web Engineering.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
