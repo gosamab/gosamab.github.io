@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 
 export default defineConfig({
 	output: "static",
-	base: "/osama-portfolio/",
+	base: "/",
 	integrations: [mdx()],
 	vite: {
 		plugins: [tailwindcss()],
