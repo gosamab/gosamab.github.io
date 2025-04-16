@@ -1,21 +1,23 @@
 {
-  "name": "osama-portfolio",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^4.2.4",
-    "@tailwindcss/vite": "^4.1.4",
-    "astro": "^5.7.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.4"
-  }
+	"name": "osama-portfolio",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"deploy": "npm run build && npx gh-pages -d dist"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^4.2.4",
+		"@tailwindcss/vite": "^4.1.4",
+		"astro": "^5.7.0"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.21",
+		"gh-pages": "^6.3.0",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^4.1.4"
+	}
 }
