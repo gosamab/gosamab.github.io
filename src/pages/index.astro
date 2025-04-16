@@ -1,11 +1,173 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// src/pages/index.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Osama Azab - Computer Science Student & Developer">
+	<section class="hero">
+		<div class="container">
+			<div class="hero-content">
+				<h1>Osama Azab</h1>
+				<h2>Computer Science Student & Developer</h2>
+				<p>Specializing in AI, Data Engineering, and Full-Stack Development</p>
+				<div class="cta-buttons">
+					<a href="/projects" class="btn primary">View Projects</a>
+					<a href="/contact" class="btn secondary">Contact Me</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="highlight-projects">
+		<div class="container">
+			<h2>Featured Projects</h2>
+			<div class="project-cards">
+				<!-- We'll replace these with the ProjectCard component later -->
+				<div class="project-card">
+					<h3>Makhtotah Research</h3>
+					<p>
+						Improving OCR accuracy on Arabic historical documents using deep
+						learning
+					</p>
+					<a href="/projects/makhtotah">Learn more →</a>
+				</div>
+
+				<div class="project-card">
+					<h3>Cyberattacks Detection</h3>
+					<p>Real-time detection of DGA/Botnet/DDoS attacks using ML</p>
+					<a href="/projects/cyberattacks">Learn more →</a>
+				</div>
+
+				<div class="project-card">
+					<h3>Streams Platform</h3>
+					<p>Full-stack .NET + React app with SQL database design</p>
+					<a href="/projects/streams">Learn more →</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="about-preview">
+		<div class="container">
+			<h2>About Me</h2>
+			<p>
+				I'm a senior Computer Science student at Prince Sultan University with a
+				passion for building meaningful technology solutions. My focus areas
+				include artificial intelligence, data engineering, and full-stack
+				development.
+			</p>
+			<p>
+				<a href="/about">Learn more about my background →</a>
+			</p>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero {
+		background: linear-gradient(
+			to right,
+			var(--color-secondary),
+			var(--color-primary)
+		);
+		color: white;
+		padding: 8rem 0;
+		text-align: center;
+	}
+
+	.hero h1 {
+		font-size: 3.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.hero h2 {
+		font-size: 1.8rem;
+		font-weight: 400;
+		margin-bottom: 1.5rem;
+	}
+
+	.hero p {
+		font-size: 1.2rem;
+		max-width: 600px;
+		margin: 0 auto 2rem;
+	}
+
+	.cta-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.8rem 1.5rem;
+		border-radius: 4px;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.btn.primary {
+		background-color: var(--color-accent);
+		color: white;
+	}
+
+	.btn.secondary {
+		background-color: transparent;
+		color: white;
+		border: 2px solid white;
+	}
+
+	.btn:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.highlight-projects,
+	.about-preview {
+		padding: 5rem 0;
+	}
+
+	.highlight-projects {
+		background-color: white;
+	}
+
+	.project-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.project-card {
+		background-color: var(--color-background);
+		border-radius: 8px;
+		padding: 2rem;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-card h3 {
+		color: var(--color-secondary);
+	}
+
+	@media (max-width: 768px) {
+		.hero h1 {
+			font-size: 2.5rem;
+		}
+
+		.hero h2 {
+			font-size: 1.5rem;
+		}
+
+		.project-cards {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

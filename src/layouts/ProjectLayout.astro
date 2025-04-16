@@ -1,0 +1,194 @@
+---
+// src/layouts/ProjectLayout.astro
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	tags?: string[];
+	imageUrl?: string;
+	projectUrl?: string;
+	githubUrl?: string;
+}
+
+const {
+	title,
+	description,
+	tags = [],
+	imageUrl = "/images/project-placeholder.jpg",
+	projectUrl,
+	githubUrl,
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} | Osama Azab`} description={description}>
+	<article class="project-detail">
+		<div class="container">
+			<header class="project-header">
+				<h1>{title}</h1>
+
+				{
+					tags.length > 0 && (
+						<div class="tags">
+							{tags.map((tag) => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
+					)
+				}
+
+				<div class="project-links">
+					{
+						projectUrl && (
+							<a
+								href={projectUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="btn primary"
+							>
+								Live Demo
+							</a>
+						)
+					}
+
+					{
+						githubUrl && (
+							<a
+								href={githubUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="btn secondary"
+							>
+								GitHub Repository
+							</a>
+						)
+					}
+				</div>
+			</header>
+
+			<div class="project-image">
+				<img src={imageUrl} alt={`${title} project screenshot`} />
+			</div>
+
+			<div class="project-content">
+				<slot />
+			</div>
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	.project-detail {
+		padding: 2rem 0 4rem;
+	}
+
+	.project-header {
+		margin-bottom: 2rem;
+		text-align: center;
+	}
+
+	.project-header h1 {
+		font-size: 2.5rem;
+		color: var(--color-secondary);
+		margin-bottom: 1rem;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.tag {
+		background-color: #f0f0f0;
+		color: var(--color-secondary);
+		padding: 0.25rem 0.75rem;
+		border-radius: 4px;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.project-links {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.8rem 1.5rem;
+		border-radius: 4px;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.btn.primary {
+		background-color: var(--color-primary);
+		color: white;
+	}
+
+	.btn.secondary {
+		background-color: transparent;
+		color: var(--color-secondary);
+		border: 2px solid var(--color-secondary);
+	}
+
+	.btn:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-image {
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		margin-bottom: 2rem;
+	}
+
+	.project-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.project-content {
+		max-width: 800px;
+		margin: 0 auto;
+		line-height: 1.7;
+	}
+
+	.project-content h2 {
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		color: var(--color-secondary);
+	}
+
+	.project-content p {
+		margin-bottom: 1.5rem;
+	}
+
+	.project-content ul,
+	.project-content ol {
+		margin-bottom: 1.5rem;
+		padding-left: 1.5rem;
+	}
+
+	.project-content li {
+		margin-bottom: 0.5rem;
+	}
+
+	.project-content img {
+		max-width: 100%;
+		border-radius: 8px;
+		margin: 1.5rem 0;
+	}
+
+	@media (max-width: 768px) {
+		.project-header h1 {
+			font-size: 2rem;
+		}
+	}
+</style>

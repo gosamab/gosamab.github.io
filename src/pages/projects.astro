@@ -1,0 +1,110 @@
+---
+// src/pages/projects.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+// This would normally come from a data file or CMS
+const projects = [
+	{
+		title: "Makhtotah Research Project",
+		description:
+			"Improving OCR accuracy on Arabic historical documents using deep learning and classical binarization methods.",
+		slug: "makhtotah-research",
+		tags: ["AI", "OCR", "Deep Learning", "Arabic NLP"],
+		imageUrl: "/images/makhtotah-research.jpg",
+	},
+	{
+		title: "Makhtotah Platform",
+		description:
+			"OCR-based web app to digitize Arabic manuscripts using Python, Flask, and Azure Vision.",
+		slug: "makhtotah-platform",
+		tags: ["OCR", "Flask", "Azure", "Web App"],
+		imageUrl: "/images/makhtotah-platform.jpg",
+	},
+	{
+		title: "OCR/HWR Implementation",
+		description:
+			"Implementing OCR/HWR by finetuning Qwen2 on Arabic data with custom preprocessing pipelines.",
+		slug: "arabic-ocr-hwr",
+		tags: ["NLP", "Qwen2", "Arabic", "ML"],
+		imageUrl: "/images/arabic-ocr.jpg",
+	},
+	{
+		title: "Cyberattacks Real-Time Detection",
+		description:
+			"ML models for detecting DGA/Botnet/DDoS attacks using DNS and traffic logs with live data ingestion.",
+		slug: "cyberattacks-detection",
+		tags: ["Cybersecurity", "ML", "Real-time Analytics"],
+		imageUrl: "/images/cyber-detection.jpg",
+	},
+	{
+		title: "Streams Platform",
+		description:
+			"Full-stack .NET + React app demonstrating SQL and schema design with integrated web scraping.",
+		slug: "streams-platform",
+		tags: [".NET", "React", "SQL", "Web Scraping"],
+		imageUrl: "/images/streams-platform.jpg",
+	},
+	{
+		title: "Hadoop Cluster",
+		description:
+			"8-node Hadoop cluster deployment across 2 machines, tested on various big data processing tasks.",
+		slug: "hadoop-cluster",
+		tags: ["Hadoop", "Distributed Systems", "Big Data"],
+		imageUrl: "/images/hadoop-cluster.jpg",
+	},
+];
+---
+
+<BaseLayout title="Projects | Osama Azab">
+	<div class="container">
+		<header class="page-header">
+			<h1>Projects</h1>
+			<p>A collection of my technical work, research, and implementations</p>
+		</header>
+
+		<div class="projects-grid">
+			{
+				projects.map((project) => (
+					<ProjectCard
+						title={project.title}
+						description={project.description}
+						slug={project.slug}
+						tags={project.tags}
+						imageUrl={project.imageUrl}
+					/>
+				))
+			}
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.page-header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.page-header h1 {
+		color: var(--color-secondary);
+		margin-bottom: 0.5rem;
+	}
+
+	.page-header p {
+		color: #666;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
