@@ -1,5 +1,30 @@
 ---
 import "../styles/global.css";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const featuredProjects = [
+	{
+		title: "Makhtotah Research",
+		description:
+			"OCR for Arabic manuscripts using deep learning and classical binarization techniques.",
+		slug: "makhtotah-research",
+		imageUrl: "/images/makhtotah-research.jpg",
+	},
+	{
+		title: "Cybersecurity Detection",
+		description:
+			"Real-time ML dashboard to detect Botnet, DGA, and DDoS attacks via live DNS + traffic logs.",
+		slug: "cyberattacks-detection",
+		imageUrl: "/images/cyber-detection.jpg",
+	},
+	{
+		title: "OCR/HWR Implementation",
+		description:
+			"Implementation of Qwen2-based OCR for Arabic text lines using synthetic and collected datasets.",
+		slug: "arabic-ocr-hwr",
+		imageUrl: "/images/arabic-ocr.jpg",
+	},
+];
 ---
 
 <html lang="en">
@@ -52,53 +77,7 @@ import "../styles/global.css";
 			<div class="max-w-5xl mx-auto">
 				<h2 class="text-3xl font-bold text-center mb-10">Featured Work</h2>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div
-						class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
-					>
-						<h3 class="text-xl font-semibold text-blue-700 mb-2">
-							Makhtotah Research
-						</h3>
-						<p class="text-sm text-gray-700">
-							OCR for Arabic manuscripts using deep learning and classical
-							binarization techniques.
-						</p>
-						<a
-							href="/projects/makhtotah"
-							class="text-blue-500 text-sm inline-block mt-2">Learn more →</a
-						>
-					</div>
-
-					<div
-						class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
-					>
-						<h3 class="text-xl font-semibold text-blue-700 mb-2">
-							Cybersecurity Detection
-						</h3>
-						<p class="text-sm text-gray-700">
-							Real-time ML dashboard to detect Botnet, DGA, and DDoS attacks via
-							live DNS + traffic logs.
-						</p>
-						<a
-							href="/projects/cyberattacks"
-							class="text-blue-500 text-sm inline-block mt-2">Learn more →</a
-						>
-					</div>
-
-					<div
-						class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
-					>
-						<h3 class="text-xl font-semibold text-blue-700 mb-2">
-							OCR/HWR Implementation
-						</h3>
-						<p class="text-sm text-gray-700">
-							Implementation of Qwen2-based OCR for Arabic text lines using
-							synthetic and collected datasets.
-						</p>
-						<a
-							href="/projects/ocr"
-							class="text-blue-500 text-sm inline-block mt-2">Learn more →</a
-						>
-					</div>
+					{featuredProjects.map((project) => <ProjectCard {...project} />)}
 				</div>
 			</div>
 		</section>
