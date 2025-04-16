@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Makhtotah Research Project | Osama Azab</title><meta name="description" content="Improving OCR accuracy on Arabic historical documents using deep learning and classical binarization methods."><link rel="stylesheet" href="/osama-portfolio/_astro/makhtotah-research.zwTyQV1S.css"></head> <body class="bg-white text-gray-900 font-sans antialiased"> <!-- Header --> <header class="bg-sky-900 text-white py-4 shadow-sm sticky top-0 z-50"> <nav class="max-w-6xl mx-auto flex justify-between items-center px-6"> <a href="/" class="text-xl font-bold hover:text-sky-200 transition">Osama Azab</a> <ul class="flex flex-wrap gap-6 text-sm"> <li><a href="/" class="hover:text-sky-300 transition">Home</a></li> <li> <a href="/projects" class="hover:text-sky-300 transition">Projects</a> </li> <li><a href="/cv" class="hover:text-sky-300 transition">CV</a></li> <li> <a href="/about" class="hover:text-sky-300 transition">About</a> </li> <li> <a href="/contact" class="hover:text-sky-300 transition">Contact</a> </li> </ul> </nav> </header> <!-- Main content --> <main class="min-h-[calc(100vh-160px)] px-4 sm:px-6 lg:px-0">  <article class="py-16 px-6 max-w-6xl mx-auto"> <header class="text-center mb-10"> <h1 class="text-4xl font-bold text-sky-800">Makhtotah Research Project</h1> <div class="flex flex-wrap justify-center gap-2 mt-4"> <span class="bg-gray-200 text-sky-800 text-sm px-3 py-1 rounded-full font-medium"> AI </span><span class="bg-gray-200 text-sky-800 text-sm px-3 py-1 rounded-full font-medium"> OCR </span><span class="bg-gray-200 text-sky-800 text-sm px-3 py-1 rounded-full font-medium"> Deep Learning </span><span class="bg-gray-200 text-sky-800 text-sm px-3 py-1 rounded-full font-medium"> Arabic NLP </span><span class="bg-gray-200 text-sky-800 text-sm px-3 py-1 rounded-full font-medium"> Computer Vision </span> </div> <div class="flex justify-center gap-4 mt-6">  <a href="https://github.com/yourusername/makhtotah-research" target="_blank" rel="noopener noreferrer" class="border border-sky-800 text-sky-800 py-2 px-4 rounded-full font-medium transition hover:bg-sky-800 hover:text-white">
+GitHub Repository
+</a> </div> </header> <div class="mb-10"> <img src="/images/makhtotah-research.jpg" alt="Makhtotah Research Project project screenshot" class="w-full rounded-xl shadow"> </div> <div class="prose max-w-3xl mx-auto text-left">  <h2>Project Overview</h2> <p>
+The Makhtotah Research Project is my senior graduation project focused on
+		improving optical character recognition (OCR) accuracy for Arabic historical
+		manuscripts. Arabic historical documents present unique challenges for OCR
+		systems due to their complex calligraphy, deterioration, and lack of
+		standardization.
+</p> <h2>The Challenge</h2> <p>Arabic historical manuscripts often suffer from:</p> <ul> <li>Degradation and aging effects (stains, fading, tears)</li> <li>Varied calligraphic styles that differ from modern Arabic</li> <li>Inconsistent spacing and diacritics</li> <li>Limited training data compared to other languages</li> <li>Background noise and artifacts</li> </ul> <h2>Methodology</h2> <p>
+My approach combines classical image processing techniques with modern deep
+		learning methods:
+</p> <h3>1. Dataset Collection and Preparation</h3> <p>
+Created a diverse dataset of historical Arabic manuscripts from various
+		sources:
+</p> <ul> <li>Digital archives of historical manuscripts</li> <li>Scanned documents from library collections</li> <li>Synthetic data generation to augment training samples</li> <li>Manual annotation of text regions and transcriptions</li> </ul> <h3>2. Preprocessing Pipeline</h3> <p>Developed a comprehensive preprocessing pipeline including:</p> <ul> <li>Adaptive binarization techniques (Otsu, Sauvola, Niblack)</li> <li>Noise reduction and filtering</li> <li>Skew correction and normalization</li> <li>Text line segmentation</li> <li>Image enhancement specific to Arabic script characteristics</li> </ul> <h3>3. Deep Learning Architecture</h3> <p>Implemented and compared several deep learning approaches:</p> <ul> <li>CNN-RNN hybrid models with attention mechanisms</li> <li>Transformer-based text recognition</li> <li>Custom architectures tailored for Arabic script features</li> <li>Transfer learning from existing OCR models</li> </ul> <h3>4. Evaluation Framework</h3> <p>Developed a comprehensive evaluation system that measures:</p> <ul> <li>Character Error Rate (CER) and Word Error Rate (WER)</li> <li>Precision, recall, and F1-score at character and word levels</li> <li>Processing time and computational efficiency</li> <li>
+Performance on different manuscript categories (age, condition, style)
+</li> </ul> <h2>Key Innovations</h2> <p>The project introduces several innovations:</p> <ul> <li>
+A hybrid binarization approach that combines the strengths of multiple
+			algorithms
+</li> <li>
+Custom data augmentation techniques specific to Arabic historical
+			documents
+</li> <li>An attention mechanism optimized for Arabic connected script</li> <li>
+A post-processing system that leverages linguistic context for error
+			correction
+</li> </ul> <h2>Results and Impact</h2> <p>The system achieved:</p> <ul> <li>
+30% reduction in Character Error Rate compared to commercial OCR solutions
+</li> <li>Significant improvement in handling degraded documents</li> <li>Better recognition of historical calligraphic styles</li> <li>
+A reusable framework that can be extended to other Arabic document types
+</li> </ul> <h2>Technologies Used</h2> <ul> <li><strong>Programming:</strong> Python, TensorFlow, PyTorch</li> <li><strong>Image Processing:</strong> OpenCV, scikit-image</li> <li><strong>Deep Learning:</strong> Custom CNN-RNN models, Transformers</li> <li> <strong>Evaluation:</strong> Custom metrics implementation, visualization tools
+</li> <li><strong>Data Management:</strong> MongoDB for dataset organization</li> </ul> <h2>Future Directions</h2> <p>Ongoing and planned improvements include:</p> <ul> <li>
+Integration with the Makhtotah Platform for end-to-end manuscript
+			digitization
+</li> <li>
+Expanding the dataset to cover more historical periods and calligraphic
+			styles
+</li> <li>Exploring few-shot learning approaches for rare manuscript types</li> <li>
+Implementing a self-supervised learning component to utilize unlabeled
+			data
+</li> </ul>  </div> </article>  </main> <!-- Footer --> <footer class="bg-sky-900 text-white text-center py-6 mt-12"> <p class="text-sm">
+&copy; 2025 Osama Azab. All rights reserved.
+</p> </footer> </body></html>
