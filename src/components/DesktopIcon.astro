@@ -34,6 +34,11 @@ const iconNameByType: Record<IconType, string> = {
 };
 
 const iconName = icon ?? iconNameByType[type];
+
+// Wrap long labels before the extension ("experience" / ".mdx") instead of mid-word.
+const dot = label.lastIndexOf(".");
+const stem = dot > 0 ? label.slice(0, dot) : label;
+const ext = dot > 0 ? label.slice(dot) : "";
 ---
 
 <a
@@ -50,6 +55,6 @@ const iconName = icon ?? iconNameByType[type];
 		<Icon name={iconName} />
 	</span>
 	<span class="desktop-icon-label">
-		{label}{external && " ↗"}
+		{stem}{ext && <><wbr />{ext}</>}{external && "\u00a0↗"}
 	</span>
 </a>

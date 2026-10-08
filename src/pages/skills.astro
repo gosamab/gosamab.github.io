@@ -52,7 +52,7 @@ const groups = [
 			<dl class="space-y-5 text-sm">
 				{
 					groups.map((g) => (
-						<div class="grid grid-cols-[8rem_1fr] sm:grid-cols-[10rem_1fr] gap-4">
+						<div class="grid grid-cols-[8rem_1fr] @xl:grid-cols-[10rem_1fr] gap-4">
 							<dt class="font-mono text-stone-500 pt-0.5">{g.label}</dt>
 							<dd class="text-stone-800 leading-relaxed">{g.items}</dd>
 						</div>

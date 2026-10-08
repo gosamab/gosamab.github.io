@@ -283,11 +283,12 @@ html[data-theme="dark"] .theme-label-to-light { display: inline; }
 	width: 0.55rem;
 	height: 0.55rem;
 	border-radius: 9999px;
-	background: var(--color-accent);
+	background: #28c840;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
 .menubar-app {
+	white-space: nowrap;
 	font-weight: 600;
 	font-size: 0.78rem;
 	letter-spacing: -0.01em;
@@ -370,6 +371,34 @@ html[data-theme="dark"] .theme-label-to-light { display: inline; }
 	font-size: 0.72rem;
 	color: var(--color-muted);
 	padding: 0 0.4rem;
+	white-space: nowrap;
+}
+
+/* Phones: drop the clock, and let dropdowns span the screen width so the
+   right-hand menus never run off the edge. */
+@media (max-width: 639px) {
+	.menubar-status {
+		display: none;
+	}
+
+	.menubar-menu {
+		position: static;
+	}
+
+	.menubar-dropdown {
+		left: 0.5rem;
+		right: 0.5rem;
+		min-width: 0;
+	}
+}
+
+@media (pointer: coarse) {
+	.menubar-dropdown a,
+	.menubar-dropdown button,
+	.win-menu-item {
+		padding-top: 0.6rem;
+		padding-bottom: 0.6rem;
+	}
 }
 
 /* On the desktop page, hide the page footer (keeps the OS feel). */
@@ -383,10 +412,18 @@ body:has(.desktop) [data-site-footer] {
 	min-height: calc(100vh - 1.75rem);
 	position: relative;
 	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	gap: 0.4rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+	align-content: start;
+	justify-items: center;
+	gap: 0.75rem 0.25rem;
 	padding: 1.5rem 1rem;
+}
+
+/* Phone home-screen grid: let icons fill their cell so labels don't wrap mid-word. */
+.desktop:not([data-arrange-active="true"]) .desktop-icon {
+	width: 100%;
+	max-width: 7.5rem;
 }
 
 @media (min-width: 768px) {
@@ -440,7 +477,7 @@ body:has(.desktop) [data-site-footer] {
 	flex-direction: column;
 	align-items: center;
 	gap: 0.55rem;
-	padding: 0.75rem 0.5rem;
+	padding: 0.75rem 0.25rem;
 	border-radius: 0.5rem;
 	width: 5.75rem;
 	text-align: center;
@@ -488,7 +525,7 @@ body:has(.desktop) [data-site-footer] {
 	line-height: 1.2;
 	word-break: break-word;
 	max-width: 100%;
-	padding: 0.05rem 0.3rem;
+	padding: 0.05rem 0.2rem;
 	border-radius: 0.25rem;
 }
 
@@ -562,6 +599,9 @@ body:has(.desktop) [data-site-footer] {
 
 .window-body {
 	background: white;
+	/* Content layouts use @container variants, so they follow the window's
+	   width (floating, maximized or static) rather than the viewport. */
+	container-type: inline-size;
 }
 
 [data-static-window].static-window-maximized {
@@ -646,6 +686,10 @@ body:has(.desktop) [data-site-footer] {
 	user-select: none;
 }
 
+.win-titlebar {
+	touch-action: none;
+}
+
 .win.win-dragging .win-titlebar {
 	cursor: grabbing;
 }
@@ -698,6 +742,31 @@ body:has(.desktop) [data-site-footer] {
 
 .win-max { background: #28c840; }
 .win-max span { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 5V3h2M9 7v2H7M3 7v2h2M9 5V3H7' stroke='black' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E"); }
+
+/* Touch screens: no hover to reveal the glyphs, and fingers need bigger buttons. */
+@media (hover: none) {
+	.win-btn span {
+		opacity: 0.55;
+	}
+}
+
+@media (pointer: coarse) {
+	.win-controls,
+	.win-controls-spacer {
+		gap: 0.6rem;
+		width: 5.5rem;
+	}
+
+	.win-btn {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	.win-btn span {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+}
 
 .win:not(.win-active) .win-btn {
 	background: #d6d3d1;

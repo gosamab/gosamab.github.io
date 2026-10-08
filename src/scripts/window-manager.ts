@@ -23,6 +23,8 @@ const DEFAULT_H = 600;
 const CASCADE_STEP = 30;
 const CASCADE_MAX = 240;
 const MENUBAR_H = 28; // 1.75rem
+const ICON_GUTTER = 132; // desktop icon column (24 padding + 92 icon) + 16 gap
+const MIN_FIT_W = 480;
 
 export class WindowManager {
 	private windows = new Map<string, Win>();
@@ -192,9 +194,18 @@ export class WindowManager {
 
 		const viewportW = window.innerWidth;
 		const viewportH = window.innerHeight;
-		const w = Math.min(DEFAULT_W, viewportW - 40);
-		const h = Math.min(DEFAULT_H, viewportH - 120);
+		// Fit between the two icon columns when there's room, so the desktop
+		// stays visible on tablets and small laptops.
+		const between = viewportW - 2 * ICON_GUTTER;
+		const w = Math.min(DEFAULT_W, between >= MIN_FIT_W ? between : viewportW - 40);
+		// Portrait screens (tablets) have height to spare; use it.
+		const h =
+			viewportH > viewportW
+				? viewportH - MENUBAR_H - 140
+				: Math.min(DEFAULT_H, viewportH - 120);
 		const isFirst = this.windows.size === 0;
+		const maxX = Math.max(20, viewportW - w - 20);
+		const maxY = Math.max(MENUBAR_H, viewportH - h - 20);
 		const rect: Rect = isFirst
 			? {
 					x: Math.max(20, Math.round((viewportW - w) / 2)),
@@ -203,8 +214,8 @@ export class WindowManager {
 					h,
 				}
 			: {
-					x: 140 + cascade,
-					y: MENUBAR_H + 20 + cascade,
+					x: Math.min(140 + cascade, maxX),
+					y: Math.min(MENUBAR_H + 20 + cascade, maxY),
 					w,
 					h,
 				};

@@ -13,7 +13,7 @@ const experience = [
 		points: [
 			"Build .NET Web APIs, integration services and web portals for motor, medical and visit-visa insurance, from quotation to policy issuance, payment and renewal.",
 			"Integrate with insurers, aggregators and Saudi government services (vehicle-accident data, national ID verification, social-insurance inquiries) over SOAP and REST.",
-			"Wrote the payment callback handling for SADAD payment integrations.",
+			"Integrated many payment gateways, including SADAD, and wrote the callback handling behind them.",
 			"Develop on and diagnose SQL Server behind high-traffic systems: execution plans, index tuning, slow queries, blocking and deadlocks. Also Oracle and PostgreSQL.",
 			"Top committer on the team, with about 7,400 commits since 2019.",
 		],
@@ -58,7 +58,7 @@ const experience = [
 				{
 					experience.map((e) => (
 						<div>
-							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-1">
+							<div class="flex flex-col @xl:flex-row @xl:justify-between @xl:items-baseline gap-1 mb-1">
 								<h3 class="font-serif text-xl font-semibold">{e.role}</h3>
 								<span class="font-mono text-sm text-stone-500 shrink-0">{e.dates}</span>
 							</div>
@@ -89,7 +89,7 @@ const experience = [
 
 		<section class="px-6 py-10 border-t border-stone-200 pb-20">
 			<h2 class="text-2xl font-semibold mb-8">Education</h2>
-			<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-1">
+			<div class="flex flex-col @xl:flex-row @xl:justify-between @xl:items-baseline gap-1 mb-1">
 				<h3 class="font-serif text-xl font-semibold">B.Sc. in Computer Science</h3>
 				<span class="font-mono text-sm text-stone-500 shrink-0">Aug 2021 - Dec 2025</span>
 			</div>

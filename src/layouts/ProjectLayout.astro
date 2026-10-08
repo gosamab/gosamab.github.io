@@ -136,7 +136,7 @@ const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
 				<span class="section-label">{typeLabel[type]}</span>
 			</div>
 
-			<h1 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">
+			<h1 class="text-4xl @xl:text-5xl font-semibold tracking-tight mb-4">
 				{title}
 			</h1>
 			<p class="text-xl text-stone-600 leading-relaxed mb-8">{tagline}</p>
@@ -177,8 +177,8 @@ const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
 		}
 
 		<!-- Quick facts + highlights -->
-		<div class="grid lg:grid-cols-3 gap-10 mb-16">
-			<div class="lg:col-span-1">
+		<div class="grid @3xl:grid-cols-3 gap-10 mb-16">
+			<div class="@3xl:col-span-1">
 				<p class="section-label mb-4">Quick facts</p>
 				<dl class="space-y-3 text-sm">
 					{
@@ -224,12 +224,12 @@ const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
 
 			{
 				highlights.length > 0 && (
-					<div class="lg:col-span-2">
+					<div class="@3xl:col-span-2">
 						<p class="section-label mb-4">Highlights</p>
-						<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+						<div class="grid grid-cols-2 @xl:grid-cols-3 gap-4">
 							{highlights.map((h) => (
 								<div class="border border-stone-200 rounded-lg p-4 bg-white">
-									<div class="font-mono text-2xl sm:text-3xl font-semibold text-stone-900 mb-1">
+									<div class="font-mono text-2xl @xl:text-3xl font-semibold text-stone-900 mb-1">
 										{h.value}
 									</div>
 									<div class="text-xs text-stone-500 leading-snug">
@@ -244,14 +244,14 @@ const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
 		</div>
 
 		<!-- Body + optional sticky TOC -->
-		<div class="grid lg:grid-cols-[1fr_14rem] gap-12">
+		<div class="grid @3xl:grid-cols-[1fr_14rem] gap-12">
 			<div class="prose-content max-w-2xl">
 				<slot />
 			</div>
 
 			{
 				toc.length > 0 && (
-					<aside class="hidden lg:block">
+					<aside class="hidden @3xl:block">
 						<div class="sticky top-20">
 							<p class="section-label mb-3">On this page</p>
 							<ul class="space-y-2 text-sm">
@@ -277,7 +277,7 @@ const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
 			relatedProjects.length > 0 && (
 				<section class="mt-20 pt-12 border-t border-stone-200">
 					<p class="section-label mb-6">Related projects</p>
-					<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+					<div class="grid @xl:grid-cols-2 @3xl:grid-cols-3 gap-4">
 						{relatedProjects.map((rp) => (
 							<a
 								href={`/projects/${rp.slug}`}
