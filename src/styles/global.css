@@ -87,8 +87,21 @@ h4 {
 	color: var(--color-muted);
 }
 
+.prose-content :where(ol):not(:where([class*="not-prose"] *)) {
+	list-style-type: decimal;
+	padding-left: 1.25rem;
+	margin-bottom: 1rem;
+	color: var(--color-muted);
+}
+
 .prose-content :where(li):not(:where([class*="not-prose"] *)) {
 	margin-bottom: 0.25rem;
+}
+
+.prose-content :where(p, li) :where(a):not(:where([class*="not-prose"] *)) {
+	color: #b45309;
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }
 
 /* --- Dark mode --- */

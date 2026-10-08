@@ -4,6 +4,7 @@ import icon from "astro-icon";
 
 export default defineConfig({
 	output: "static",
+	compressHTML: false,
 	base: "/",
 	integrations: [
 		icon({

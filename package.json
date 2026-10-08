@@ -12,16 +12,13 @@
 		"@iconify-json/flat-color-icons": "^1.2.3",
 		"@iconify-json/lucide": "^1.2.105",
 		"@iconify-json/simple-icons": "^1.2.80",
-		"@tailwindcss/vite": "^4.2.4",
-		"astro": "^6.1.10",
+		"@tailwindcss/vite": "^4.3.3",
+		"astro": "^7.3.7",
 		"astro-icon": "^1.1.5",
-		"tailwindcss": "^4.2.4"
+		"tailwindcss": "^4.3.3"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",
 		"typescript": "^5.9.3"
-	},
-	"overrides": {
-		"vite": "^7.3.2"
 	}
 }

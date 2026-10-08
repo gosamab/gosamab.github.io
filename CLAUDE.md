@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal portfolio site for Osama Azab, built with Astro 6 (static output) and deployed to GitHub Pages at `gosamab.github.io`.
+Personal portfolio site for Osama Azab, built with Astro 7 (static output) and deployed to GitHub Pages at `gosamab.github.io`.
 
 ## Commands
 

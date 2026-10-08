@@ -1,10 +1,10 @@
 # gosamab.github.io
 
-Personal portfolio site for Osama Azab, built with [Astro 6](https://astro.build) (static output) and [Tailwind CSS v4](https://tailwindcss.com), deployed to GitHub Pages at [gosamab.github.io](https://gosamab.github.io).
+Personal portfolio site for Osama Azab, built with [Astro 7](https://astro.build) (static output) and [Tailwind CSS v4](https://tailwindcss.com), deployed to GitHub Pages at [gosamab.github.io](https://gosamab.github.io).
 
 ## Requirements
 
-- Node.js 22.12 or newer (Astro 6 requirement)
+- Node.js 22.12 or newer (Astro 7 requirement)
 
 ## Commands
 
