@@ -1,10 +1,10 @@
 # gosamab.github.io
 
-Personal portfolio site for Osama Azab — built with [Astro 6](https://astro.build) (static output) and [Tailwind CSS v4](https://tailwindcss.com), deployed to GitHub Pages at [gosamab.github.io](https://gosamab.github.io).
+Personal portfolio site for Osama Azab, built with [Astro 6](https://astro.build) (static output) and [Tailwind CSS v4](https://tailwindcss.com), deployed to GitHub Pages at [gosamab.github.io](https://gosamab.github.io).
 
 ## Requirements
 
-- Node.js ≥ 22.12 (Astro 6 requirement)
+- Node.js 22.12 or newer (Astro 6 requirement)
 
 ## Commands
 
@@ -15,26 +15,21 @@ Personal portfolio site for Osama Azab — built with [Astro 6](https://astro.bu
 | `npm run build` | Build the static site to `./dist/` |
 | `npm run preview` | Serve the built `./dist/` locally |
 | `npm run astro check` | Type-check `.astro` files |
-| `npm run deploy` | Manually publish `./dist/` to the `gh-pages` branch |
 
 ## Deployment
 
-Two paths to GitHub Pages exist:
-
-1. **GitHub Actions** (`.github/workflows/astro-gh-pages.yml`) — primary path; runs on every push to `master`, builds, and publishes via `peaceiris/actions-gh-pages@v4`.
-2. **`npm run deploy`** — manual fallback that pushes `./dist/` to the `gh-pages` branch via the `gh-pages` npm package.
-
-`astro.config.mjs` sets `base: "/"` (correct for a user/organization site at the root domain).
+GitHub Actions (`.github/workflows/astro-gh-pages.yml`) runs on every push to `master`, builds the site and publishes it with `actions/deploy-pages`. The repo's Pages source is set to "GitHub Actions".
 
 ## Project structure
 
 ```
 src/
-├── components/    Reusable Astro components (e.g. ProjectCard)
-├── layouts/       BaseLayout (site shell) and ProjectLayout (project detail chrome)
-├── pages/         File-based routes (index, about, contact, cv, projects, projects/<slug>)
-└── styles/        global.css — single Tailwind entry (@import "tailwindcss")
+├── components/    Reusable Astro components (DesktopIcon, ProjectCard)
+├── layouts/       BaseLayout (site shell), WindowChrome, ProjectLayout (project pages)
+├── pages/         File-based routes (desktop, home, experience, skills, credentials, projects/<slug>)
+├── scripts/       Desktop window manager and icon arranger
+└── styles/        global.css, the single Tailwind entry
 public/            Static assets served at the root (CV.pdf, me.jpg, favicon.svg)
 ```
 
-Adding a project requires two edits: append a card to the `projects` array in `src/pages/projects.astro` and create a matching `src/pages/projects/<slug>.astro` page that uses `ProjectLayout`.
+Adding a project takes two edits: add an icon to the `projects` array in `src/pages/projects.astro` and create a matching `src/pages/projects/<slug>.astro` page that uses `ProjectLayout`.
