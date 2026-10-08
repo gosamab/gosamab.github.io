@@ -1,0 +1,27 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Prayer Mat",
+	tagline: "A simple prayer tracker with prayer times, live on the App Store.",
+	description: "Prayer Mat: a Flutter prayer tracker for iOS, live on the App Store.",
+	status: "shipped" as const,
+	startDate: "2026",
+	type: "product" as const,
+	role: "Solo",
+	stack: ["Flutter", "Dart"],
+	links: {
+		appStore: "https://apps.apple.com/app/id6761862712",
+	},
+	relatedProjects: [{ slug: "ayat-qurania", title: "Ayat Qurania" }],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>What it does</h2>
+	<p>
+		Prayer Mat tracks your daily prayers and shows prayer times. It's built
+		in Flutter and released on the App Store (version 1.7), rated 5.0 in
+		Saudi Arabia.
+	</p>
+</ProjectLayout>

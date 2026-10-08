@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+
+const groups = [
+	{
+		label: "AI",
+		items:
+			"LLM agents, RAG, LangChain, LangGraph, Anthropic and OpenAI APIs, MCP servers, n8n, Qdrant, Langfuse, NeMo Guardrails, Docling",
+	},
+	{
+		label: "ML and data",
+		items:
+			"LightGBM, scikit-learn, Pandas, OCR, NLP, Spark, Hive, Impala, Apache Airflow, Power BI",
+	},
+	{
+		label: "Backend",
+		items:
+			"C#, ASP.NET Core, .NET 8, EF Core, SOAP and REST APIs, RabbitMQ, Hangfire, Python, FastAPI, Rust",
+	},
+	{
+		label: "Databases",
+		items:
+			"SQL Server (execution plans, indexing, blocking, deadlocks), Oracle, PostgreSQL",
+	},
+	{
+		label: "Frontend and mobile",
+		items: "TypeScript, Next.js, Vue 3, SvelteKit, Tauri, Flutter, Tailwind",
+	},
+	{
+		label: "Platforms",
+		items: "Git, Docker, Azure DevOps pipelines, GCP",
+	},
+	{
+		label: "Languages",
+		items: "Arabic (native), English (fluent)",
+	},
+];
+---
+
+<BaseLayout title="Skills | Osama Azab">
+	<WindowChrome filename="skills.mdx" maxWidth="max-w-3xl">
+		<section class="px-6 pt-16 pb-10">
+			<p class="section-label mb-3">Skills &amp; tools</p>
+			<h1 class="text-4xl font-semibold mb-3">What's in the toolbox.</h1>
+			<p class="text-stone-600">
+				Things I've shipped with, not things I've watched a tutorial on.
+			</p>
+		</section>
+
+		<section class="px-6 pb-20">
+			<dl class="space-y-5 text-sm">
+				{
+					groups.map((g) => (
+						<div class="grid grid-cols-[8rem_1fr] sm:grid-cols-[10rem_1fr] gap-4">
+							<dt class="font-mono text-stone-500 pt-0.5">{g.label}</dt>
+							<dd class="text-stone-800 leading-relaxed">{g.items}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</section>
+	</WindowChrome>
+</BaseLayout>

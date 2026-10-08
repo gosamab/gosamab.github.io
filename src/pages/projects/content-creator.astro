@@ -1,0 +1,114 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Content Creator",
+	tagline:
+		"Studio platform for AI-generated short-form video. Brand-centric pipeline to YouTube Shorts → TikTok → Reels.",
+	description:
+		"Multi-platform short-form video pipeline. ≤60s 9:16 videos, generated end-to-end and published per brand and per platform.",
+	status: "in-progress" as const,
+	startDate: "2026",
+	type: "product" as const,
+	role: "Solo developer (current focus)",
+	stack: [
+		"Python",
+		"FastAPI",
+		"Typer",
+		"Hatchet",
+		"PostgreSQL",
+		"Vue 3",
+		"vue-flow",
+		"Anthropic",
+	],
+	links: {
+		repo: "https://github.com/gosamab/youtube-generator",
+	},
+	relatedProjects: [
+		{ slug: "shai", title: "shai" },
+		{ slug: "open-security", title: "Open Security" },
+	],
+	toc: [
+		{ id: "what-it-is", label: "What it is" },
+		{ id: "architecture", label: "Architecture" },
+		{ id: "ui", label: "Studio + Workshop" },
+		{ id: "interfaces", label: "API + CLI as peers" },
+		{ id: "the-editor", label: "The Editor" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="what-it-is">What it is</h2>
+	<p>
+		A studio platform for generating and publishing AI-created video
+		content. Each <strong>Brand</strong> declares the formats it can
+		produce and the platform accounts it can publish to. The system
+		generates ≤60s 9:16 vertical videos and publishes them across
+		<strong>YouTube Shorts → TikTok → Reels</strong> (rollout order).
+	</p>
+
+	<h2 id="architecture">Architecture</h2>
+	<p>
+		Hexagonal: <code>core/</code> + <code>core/ports/</code> +
+		<code>adapters/</code> + <code>interfaces/</code>.
+	</p>
+	<ul>
+		<li><strong>Core</strong> is pure Python: no FastAPI, no Click, no Hatchet, no SQLAlchemy imports.</li>
+		<li><strong>Ports</strong> declare interfaces (repositories, ArtifactStore, SecretStore, WorkflowEngine, PromptStore).</li>
+		<li><strong>Adapters</strong> implement them (Postgres, filesystem, Hatchet, YouTube).</li>
+		<li><strong>Workers</strong> register Hatchet workflows.</li>
+	</ul>
+	<p>
+		The DAG itself isn't defined in Hatchet code. It's stored in
+		Postgres (<code>format_stages</code> +
+		<code>format_stage_edges</code>). One generic
+		<code>format_runner</code> Hatchet workflow loads the format from
+		the DB and dynamically spawns child tasks per stage. Stage types
+		(script_gen, tts, imagery, motion, compose, metadata_gen,
+		brief_gen) are code-registered; formats compose them via DB writes,
+		no code change needed to launch a new format.
+	</p>
+	<p>
+		<strong>Configs in DB, artifacts on disk.</strong> Formats, prompts,
+		providers, music metadata, and secrets live in Postgres. Binary
+		artifacts (audio, images, videos, music) stay on disk under
+		<code>data/</code> and <code>assets/</code>, with pointers in the
+		database.
+	</p>
+
+	<h2 id="ui">Studio + Workshop</h2>
+	<p>Two zones, same app. This sets up role-based access without a code change later.</p>
+	<ul>
+		<li><strong>Studio</strong> (creator-facing): Home, Brands, Content, Editor, Ideate, Analytics.</li>
+		<li><strong>Workshop</strong> (admin-only when auth lands): Formats DAG editor (vue-flow), Prompts, Providers, Music, Secrets.</li>
+	</ul>
+	<p>
+		The format editor is a <em>DAG canvas</em>, not a YAML pane. Stage
+		types are the palette; edges validate against I/O schemas at draw
+		time. The video detail's Pipeline tab shows the run as a DAG with
+		status dots, cost, duration, provider per node.
+	</p>
+
+	<h2 id="interfaces">API + CLI as peers</h2>
+	<p>
+		<code>interfaces/api/</code> (FastAPI) and
+		<code>core/cli/</code> (Typer) are <strong>true peers</strong>:
+		both wire ports → adapters and call the same
+		<code>core/services/*</code> methods. Neither has business logic.
+		Anything you can do from the UI you can do as
+		<code>content-studio brand create …</code>,
+		<code>content-studio video render …</code>, etc.
+	</p>
+
+	<h2 id="the-editor">The Editor</h2>
+	<p>
+		Phase 9 of the rewrite added a <strong>chat-driven Editor</strong>
+		that wraps a single video with a 6-tool Anthropic loop. The agent
+		can read the format, mutate the video's
+		<code>creation_params</code> overrides, and queue runs through the
+		WorkflowEngine port. The point is to make iteration on a single
+		video feel like editing a draft with a collaborator, not waiting
+		for a render.
+	</p>
+</ProjectLayout>

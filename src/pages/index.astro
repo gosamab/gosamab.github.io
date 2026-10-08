@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DesktopIcon from "../components/DesktopIcon.astro";
+
+const fileIcons = [
+	{ href: "/home", label: "home.mdx", type: "doc" as const },
+	{ href: "/projects", label: "projects", type: "folder" as const },
+	{ href: "/experience", label: "experience.mdx", type: "doc" as const },
+	{ href: "/credentials", label: "credentials.mdx", type: "doc" as const },
+	{ href: "/skills", label: "skills.mdx", type: "doc" as const },
+	{ href: "/CV.pdf", label: "cv.pdf", type: "pdf" as const, external: true },
+];
+
+const linkIcons = [
+	{
+		href: "https://github.com/gosamab",
+		label: "github",
+		type: "link" as const,
+		icon: "simple-icons:github",
+		external: true,
+	},
+	{
+		href: "https://linkedin.com/in/gosamab",
+		label: "linkedin",
+		type: "link" as const,
+		icon: "simple-icons:linkedin",
+		external: true,
+	},
+	{
+		href: "mailto:gosamab@hotmail.com",
+		label: "email",
+		type: "link" as const,
+		icon: "simple-icons:gmail",
+		external: true,
+	},
+	{
+		href: "https://wa.me/966534832267",
+		label: "whatsapp",
+		type: "link" as const,
+		icon: "simple-icons:whatsapp",
+		external: true,
+	},
+];
+---
+
+<BaseLayout title="Osama Azab | AI Engineer & .NET Developer">
+	<div class="desktop" data-arrange-canvas>
+		{
+			fileIcons.map((icon, i) => (
+				<DesktopIcon {...icon} side="left" idx={i} />
+			))
+		}
+		{
+			linkIcons.map((icon, i) => (
+				<DesktopIcon {...icon} side="right" idx={i} />
+			))
+		}
+	</div>
+
+	<div id="window-root"></div>
+</BaseLayout>
+
+<script>
+	import { bootDesktop } from "../scripts/window-manager";
+	import { bootArranger } from "../scripts/desktop-arranger";
+
+	const init = () => {
+		bootArranger();
+		bootDesktop();
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", init);
+	} else {
+		init();
+	}
+</script>

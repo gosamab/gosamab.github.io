@@ -1,0 +1,309 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import WindowChrome from "./WindowChrome.astro";
+
+interface LinkSet {
+	live?: string;
+	repo?: string;
+	paper?: string;
+	demo?: string;
+	slides?: string;
+	appStore?: string;
+	press?: string;
+}
+
+interface Highlight {
+	value: string;
+	label: string;
+}
+
+interface RelatedProject {
+	slug: string;
+	title: string;
+}
+
+interface TocItem {
+	id: string;
+	label: string;
+}
+
+interface Props {
+	title: string;
+	tagline: string;
+	description?: string;
+	status: "shipped" | "in-progress" | "ongoing" | "archived";
+	startDate?: string;
+	endDate?: string;
+	type:
+		| "research"
+		| "product"
+		| "day-job"
+		| "competition"
+		| "course"
+		| "tooling";
+	role?: string;
+	team?: string;
+	stack?: string[];
+	links?: LinkSet;
+	hero?: string;
+	heroAlt?: string;
+	highlights?: Highlight[];
+	relatedProjects?: RelatedProject[];
+	toc?: TocItem[];
+}
+
+const {
+	title,
+	tagline,
+	description,
+	status,
+	startDate,
+	endDate,
+	type,
+	role,
+	team,
+	stack = [],
+	links = {},
+	hero,
+	heroAlt,
+	highlights = [],
+	relatedProjects = [],
+	toc = [],
+} = Astro.props;
+
+const statusStyle: Record<Props["status"], string> = {
+	shipped: "bg-emerald-50 text-emerald-800 border-emerald-200",
+	"in-progress": "bg-amber-50 text-amber-800 border-amber-200",
+	ongoing: "bg-amber-50 text-amber-800 border-amber-200",
+	archived: "bg-stone-100 text-stone-600 border-stone-200",
+};
+
+const statusLabel: Record<Props["status"], string> = {
+	shipped: "Shipped",
+	"in-progress": "In progress",
+	ongoing: "Ongoing",
+	archived: "Archived",
+};
+
+const typeLabel: Record<Props["type"], string> = {
+	research: "Research",
+	product: "Product",
+	"day-job": "Professional",
+	competition: "Competition",
+	course: "Course project",
+	tooling: "Tooling",
+};
+
+const dateRange =
+	startDate && endDate
+		? endDate === "ongoing" || endDate === "Ongoing"
+			? `${startDate} → ongoing`
+			: `${startDate} → ${endDate}`
+		: startDate || endDate || null;
+
+const linkEntries: Array<{ label: string; href: string; primary?: boolean }> = [
+	links.live && { label: "Live", href: links.live, primary: true },
+	links.repo && { label: "Repo", href: links.repo, primary: !links.live },
+	links.demo && { label: "Demo", href: links.demo },
+	links.paper && { label: "Paper", href: links.paper },
+	links.slides && { label: "Slides", href: links.slides },
+	links.appStore && { label: "App Store", href: links.appStore },
+	links.press && { label: "Press", href: links.press },
+].filter(Boolean) as Array<{ label: string; href: string; primary?: boolean }>;
+---
+
+<BaseLayout
+	title={`${title} | Osama Azab`}
+	description={description ?? tagline}
+>
+	<WindowChrome filename={`${title.toLowerCase().replace(/\s+/g, "-")}.mdx`}>
+	<article class="px-6 pt-10 pb-12">
+		<a
+			href="/projects"
+			class="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-amber-700 transition mb-8"
+		>
+			← All projects
+		</a>
+
+		<!-- Header -->
+		<header class="max-w-3xl">
+			<div class="flex flex-wrap items-center gap-2 mb-5">
+				<span
+					class={`inline-block font-mono text-[11px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${statusStyle[status]}`}
+				>
+					{statusLabel[status]}
+				</span>
+				<span class="section-label">{typeLabel[type]}</span>
+			</div>
+
+			<h1 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">
+				{title}
+			</h1>
+			<p class="text-xl text-stone-600 leading-relaxed mb-8">{tagline}</p>
+
+			{
+				linkEntries.length > 0 && (
+					<div class="flex flex-wrap gap-3 mb-10">
+						{linkEntries.map((link) => (
+							<a
+								href={link.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class={
+									link.primary
+										? "inline-block bg-stone-900 hover:bg-amber-700 text-white py-2 px-4 rounded-md text-sm font-medium transition"
+										: "inline-block border border-stone-300 hover:border-stone-900 text-stone-900 py-2 px-4 rounded-md text-sm font-medium transition"
+								}
+							>
+								{link.label} ↗
+							</a>
+						))}
+					</div>
+				)
+			}
+		</header>
+
+		<!-- Hero image -->
+		{
+			hero && (
+				<div class="aspect-[16/9] bg-stone-100 border border-stone-200 rounded-lg overflow-hidden mb-12">
+					<img
+						src={hero}
+						alt={heroAlt ?? `${title} screenshot`}
+						class="w-full h-full object-cover"
+					/>
+				</div>
+			)
+		}
+
+		<!-- Quick facts + highlights -->
+		<div class="grid lg:grid-cols-3 gap-10 mb-16">
+			<div class="lg:col-span-1">
+				<p class="section-label mb-4">Quick facts</p>
+				<dl class="space-y-3 text-sm">
+					{
+						dateRange && (
+							<div class="grid grid-cols-[5rem_1fr] gap-3">
+								<dt class="font-mono text-stone-500">Timeline</dt>
+								<dd class="text-stone-800">{dateRange}</dd>
+							</div>
+						)
+					}
+					{
+						role && (
+							<div class="grid grid-cols-[5rem_1fr] gap-3">
+								<dt class="font-mono text-stone-500">Role</dt>
+								<dd class="text-stone-800">{role}</dd>
+							</div>
+						)
+					}
+					{
+						team && (
+							<div class="grid grid-cols-[5rem_1fr] gap-3">
+								<dt class="font-mono text-stone-500">Team</dt>
+								<dd class="text-stone-800">{team}</dd>
+							</div>
+						)
+					}
+					{
+						stack.length > 0 && (
+							<div class="grid grid-cols-[5rem_1fr] gap-3">
+								<dt class="font-mono text-stone-500 pt-1">Stack</dt>
+								<dd class="flex flex-wrap gap-1.5">
+									{stack.map((tech) => (
+										<span class="font-mono text-[11px] text-stone-600 border border-stone-200 px-2 py-0.5 rounded">
+											{tech}
+										</span>
+									))}
+								</dd>
+							</div>
+						)
+					}
+				</dl>
+			</div>
+
+			{
+				highlights.length > 0 && (
+					<div class="lg:col-span-2">
+						<p class="section-label mb-4">Highlights</p>
+						<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+							{highlights.map((h) => (
+								<div class="border border-stone-200 rounded-lg p-4 bg-white">
+									<div class="font-mono text-2xl sm:text-3xl font-semibold text-stone-900 mb-1">
+										{h.value}
+									</div>
+									<div class="text-xs text-stone-500 leading-snug">
+										{h.label}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				)
+			}
+		</div>
+
+		<!-- Body + optional sticky TOC -->
+		<div class="grid lg:grid-cols-[1fr_14rem] gap-12">
+			<div class="prose-content max-w-2xl">
+				<slot />
+			</div>
+
+			{
+				toc.length > 0 && (
+					<aside class="hidden lg:block">
+						<div class="sticky top-20">
+							<p class="section-label mb-3">On this page</p>
+							<ul class="space-y-2 text-sm">
+								{toc.map((item) => (
+									<li>
+										<a
+											href={`#${item.id}`}
+											class="text-stone-500 hover:text-amber-700 transition leading-snug block"
+										>
+											{item.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					</aside>
+				)
+			}
+		</div>
+
+		<!-- Related projects -->
+		{
+			relatedProjects.length > 0 && (
+				<section class="mt-20 pt-12 border-t border-stone-200">
+					<p class="section-label mb-6">Related projects</p>
+					<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+						{relatedProjects.map((rp) => (
+							<a
+								href={`/projects/${rp.slug}`}
+								class="group block border border-stone-200 hover:border-stone-400 rounded-lg p-4 transition"
+							>
+								<div class="font-serif text-base font-semibold text-stone-900 group-hover:text-amber-700 transition">
+									{rp.title}
+								</div>
+								<div class="mt-2 text-sm text-stone-500 group-hover:text-amber-700 transition">
+									Read →
+								</div>
+							</a>
+						))}
+					</div>
+				</section>
+			)
+		}
+
+		<div class="mt-20 pt-8 border-t border-stone-200">
+			<a
+				href="/projects"
+				class="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-amber-700 transition"
+			>
+				← All projects
+			</a>
+		</div>
+	</article>
+	</WindowChrome>
+</BaseLayout>

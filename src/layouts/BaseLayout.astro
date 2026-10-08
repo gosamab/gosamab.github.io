@@ -1,0 +1,192 @@
+---
+const {
+	title = "Osama Azab",
+	description = "Osama Azab, AI engineer and .NET developer in Riyadh. LLM agents, RAG and integrations for the systems businesses already run.",
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary" />
+		<script is:inline>
+			(function () {
+				try {
+					var saved = localStorage.getItem("theme");
+					if (saved === "dark" || saved === "light") {
+						document.documentElement.dataset.theme = saved;
+						return;
+					}
+				} catch (e) {}
+				var prefersDark =
+					window.matchMedia &&
+					window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+			})();
+		</script>
+	</head>
+	<body class="text-stone-900">
+		<div class="menubar" role="banner">
+			<div class="menubar-inner">
+				<a class="menubar-logo" href="/" aria-label="Home">
+					<span class="menubar-dot"></span>
+					<span class="menubar-app">Osama Azab</span>
+				</a>
+
+				<details class="menubar-menu">
+					<summary>File</summary>
+					<div class="menubar-dropdown">
+						<a href="/home" data-desktop-icon>Open home.mdx</a>
+						<a href="/projects" data-desktop-icon>Open projects/</a>
+						<a href="/CV.pdf" target="_blank" rel="noopener">Open cv.pdf ↗</a>
+					</div>
+				</details>
+
+				<details class="menubar-menu">
+					<summary>Go</summary>
+					<div class="menubar-dropdown">
+						<a href="/home#work" data-desktop-icon>Work</a>
+						<a href="/experience" data-desktop-icon>Experience</a>
+						<a href="/projects" data-desktop-icon>All projects</a>
+						<a href="/home#contact" data-desktop-icon>Contact</a>
+					</div>
+				</details>
+
+				<details class="menubar-menu">
+					<summary>View</summary>
+					<div class="menubar-dropdown">
+						<button type="button" data-action="toggle-theme">
+							<span class="theme-label-to-dark">Switch to dark mode</span>
+							<span class="theme-label-to-light">Switch to light mode</span>
+						</button>
+						<button type="button" data-action="reset-desktop">
+							Reset desktop layout
+						</button>
+					</div>
+				</details>
+
+				<details
+					class="menubar-menu"
+					id="window-menu"
+					style="display: none;"
+				>
+					<summary>Window</summary>
+					<div class="menubar-dropdown" id="window-list"></div>
+				</details>
+
+				<details class="menubar-menu">
+					<summary>Help</summary>
+					<div class="menubar-dropdown">
+						<a href="https://github.com/gosamab" target="_blank" rel="noopener">GitHub ↗</a>
+						<a href="https://linkedin.com/in/gosamab" target="_blank" rel="noopener">LinkedIn ↗</a>
+						<a href="mailto:gosamab@hotmail.com">Email ↗</a>
+					</div>
+				</details>
+
+				<div class="menubar-spacer"></div>
+
+				<div class="menubar-status">
+					<span id="menubar-clock" aria-live="off"></span>
+				</div>
+			</div>
+		</div>
+
+		<main class="min-h-[calc(100vh-1.75rem)]">
+			<slot />
+		</main>
+
+		<footer class="border-t border-stone-200 mt-24" data-site-footer>
+			<div
+				class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between gap-4 text-sm text-stone-500"
+			>
+				<p>&copy; {currentYear} Osama Azab</p>
+				<div class="flex gap-5">
+					<a
+						href="https://github.com/gosamab"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:text-stone-900 transition">GitHub</a
+					>
+					<a
+						href="https://linkedin.com/in/gosamab"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:text-stone-900 transition">LinkedIn</a
+					>
+					<a
+						href="mailto:gosamab@hotmail.com"
+						class="hover:text-stone-900 transition">Email</a
+					>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			function tick() {
+				const el = document.getElementById("menubar-clock");
+				if (!el) return;
+				const now = new Date();
+				const day = now.toLocaleDateString(undefined, { weekday: "short" });
+				const time = now.toLocaleTimeString(undefined, {
+					hour: "numeric",
+					minute: "2-digit",
+				});
+				el.textContent = `${day} ${time}`;
+			}
+			tick();
+			setInterval(tick, 30 * 1000);
+
+			document.addEventListener("click", (e) => {
+				const target = e.target as HTMLElement | null;
+				document.querySelectorAll<HTMLDetailsElement>(".menubar-menu[open]").forEach((d) => {
+					if (!target || !d.contains(target)) d.removeAttribute("open");
+				});
+			});
+
+			document
+				.querySelectorAll<HTMLButtonElement>('[data-action="reset-desktop"]')
+				.forEach((btn) => {
+					btn.addEventListener("click", () => {
+						try {
+							localStorage.removeItem("desktop-icon-positions");
+						} catch {
+							/* ignore */
+						}
+						if (window.location.pathname === "/") {
+							window.location.reload();
+						} else {
+							window.location.href = "/";
+						}
+					});
+				});
+
+			document
+				.querySelectorAll<HTMLButtonElement>('[data-action="toggle-theme"]')
+				.forEach((btn) => {
+					btn.addEventListener("click", () => {
+						const current = document.documentElement.dataset.theme ?? "light";
+						const next = current === "dark" ? "light" : "dark";
+						document.documentElement.dataset.theme = next;
+						try {
+							localStorage.setItem("theme", next);
+						} catch {
+							/* ignore */
+						}
+					});
+				});
+		</script>
+	</body>
+</html>

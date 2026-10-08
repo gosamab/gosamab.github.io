@@ -1,0 +1,63 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Arabic OCR/HWR with Qwen2",
+	tagline:
+		"Finetuning Qwen2 on Arabic text lines with synthetic + collected data, the model-side track of Makhtotah.",
+	description:
+		"Qwen2 finetuning experiments for Arabic OCR and handwritten-text recognition.",
+	status: "ongoing" as const,
+	startDate: "2025",
+	type: "research" as const,
+	role: "Researcher, lead implementer",
+	team: "Sub-track of Makhtotah, advised by Dr. Omar Alomair",
+	stack: ["Python", "PyTorch", "Qwen2", "HuggingFace"],
+	relatedProjects: [
+		{ slug: "makhtotah-research", title: "Makhtotah Research" },
+		{ slug: "makhtotah-platform", title: "Makhtotah Platform" },
+	],
+	toc: [
+		{ id: "why", label: "Why this experiment" },
+		{ id: "data", label: "Data" },
+		{ id: "what-i-found", label: "What I found" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="why">Why this experiment</h2>
+	<p>
+		The Makhtotah Research project showed that for degraded Arabic
+		manuscripts, preprocessing wins are larger than model wins. But for
+		modern Arabic (printed and handwritten lines) that conclusion
+		flips: a strong general-purpose recognizer plus light adaptation can
+		out-perform a model trained from scratch. Qwen2 was the obvious place
+		to test that.
+	</p>
+
+	<h2 id="data">Data</h2>
+	<p>
+		Two sources, intentionally:
+	</p>
+	<ul>
+		<li><strong>Collected.</strong> Real Arabic text lines pulled from public datasets and clean scans, with line-level transcription.</li>
+		<li><strong>Synthetic.</strong> Programmatically rendered lines covering the long tail of glyphs the collected set under-represents: unusual ligatures, rare characters, diacritic combinations.</li>
+	</ul>
+	<p>
+		Synthetic data is great for <em>character coverage</em> and mediocre
+		for <em>degradation patterns</em>. So I use it to fix the
+		distribution, not to substitute for real images.
+	</p>
+
+	<h2 id="what-i-found">What I found</h2>
+	<ul>
+		<li>Light finetuning on Qwen2 closes the gap to specialized OCR architectures on clean text.</li>
+		<li>HWR (handwritten) is much harder; collected handwriting samples dominate, synthetic helps less here.</li>
+		<li>Decoding strategy matters more than I expected: beam search with character-level constraints reduces error on near-miss confusions (similar shapes, missing dots).</li>
+	</ul>
+	<p>
+		The work continues to feed into Makhtotah Research and the
+		Platform's recognition layer.
+	</p>
+</ProjectLayout>

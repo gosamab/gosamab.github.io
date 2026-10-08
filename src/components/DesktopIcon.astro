@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon/components";
+
+type IconType = "doc" | "folder" | "pdf" | "log" | "app" | "link" | "mov";
+
+interface Props {
+	href: string;
+	label: string;
+	type?: IconType;
+	external?: boolean;
+	icon?: string;
+	side?: "left" | "right";
+	idx?: number;
+}
+
+const {
+	href,
+	label,
+	type = "doc",
+	external = false,
+	icon,
+	side = "left",
+	idx = 0,
+} = Astro.props;
+
+const iconNameByType: Record<IconType, string> = {
+	doc: "flat-color-icons:document",
+	folder: "flat-color-icons:folder",
+	pdf: "flat-color-icons:document",
+	log: "flat-color-icons:file",
+	app: "flat-color-icons:multiple-devices",
+	link: "flat-color-icons:link",
+	mov: "flat-color-icons:video-file",
+};
+
+const iconName = icon ?? iconNameByType[type];
+---
+
+<a
+	href={href}
+	target={external ? "_blank" : undefined}
+	rel={external ? "noopener noreferrer" : undefined}
+	class="desktop-icon group"
+	data-desktop-icon
+	data-icon-id={label}
+	data-default-side={side}
+	data-default-idx={idx}
+>
+	<span class="desktop-icon-glyph" data-type={type} aria-hidden="true">
+		<Icon name={iconName} />
+	</span>
+	<span class="desktop-icon-label">
+		{label}{external && " ↗"}
+	</span>
+</a>

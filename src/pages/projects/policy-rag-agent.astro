@@ -1,0 +1,46 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Policy RAG Agent",
+	tagline:
+		"An agentic RAG assistant that answers staff questions from internal policy documents and cites its sources.",
+	description:
+		"Agentic RAG over internal policy documents for a Saudi health-insurance regulator, with guardrails, tracing and a feedback UI.",
+	status: "shipped" as const,
+	startDate: "2025",
+	type: "product" as const,
+	role: "AI engineering co-op",
+	stack: ["LangGraph", "LangChain", "Docling", "Qdrant", "NeMo Guardrails", "Langfuse", "Streamlit"],
+	relatedProjects: [
+		{ slug: "readmissions-ml", title: "Readmissions ML Pipeline" },
+		{ slug: "n8n-lead-capture", title: "n8n AI Lead Capture" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>What it does</h2>
+	<p>
+		Built during my co-op at a Saudi health-insurance regulator. Staff ask
+		questions in plain language and get answers grounded in the
+		regulator's internal policy documents, with the sources shown next to
+		each answer.
+	</p>
+
+	<h2>How it's built</h2>
+	<ul>
+		<li><strong>Knowledge base:</strong> Docling parses the documents, then chunking, embedding and Qdrant.</li>
+		<li><strong>Answer path:</strong> LangChain and LangGraph orchestrate retrieval and grounded generation on an open-source LLM (GPT-OSS).</li>
+		<li><strong>Guardrails:</strong> NVIDIA NeMo Guardrails enforce retrieval constraints and block made-up answers.</li>
+		<li><strong>Observability:</strong> Langfuse for tracing, quality scoring and edge-case detection.</li>
+		<li><strong>UI:</strong> a Streamlit app where staff review cited sources and rate answers. Ratings flow into Langfuse.</li>
+	</ul>
+
+	<h2>What I took from it</h2>
+	<p>
+		Guardrails and monitoring caught more bad answers than any amount of
+		prompt tuning. Testing each piece on its own before wiring them
+		together saved a lot of time.
+	</p>
+</ProjectLayout>

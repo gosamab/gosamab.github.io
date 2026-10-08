@@ -1,0 +1,38 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Open Security",
+	tagline:
+		"A desktop app that runs a 5-stage Claude pipeline to find security issues in your code.",
+	description:
+		"Open Security: an open-source desktop AI security scanner built with Tauri v2, Rust and SvelteKit.",
+	status: "shipped" as const,
+	startDate: "2026",
+	type: "product" as const,
+	role: "Solo",
+	stack: ["Rust", "Tauri v2", "SvelteKit", "Anthropic API", "tree-sitter"],
+	links: {
+		repo: "https://github.com/gosamab/open-sec",
+	},
+	relatedProjects: [
+		{ slug: "shai", title: "shai" },
+		{ slug: "content-creator", title: "Content Creator" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>What it does</h2>
+	<p>
+		Point Open Security at a codebase and it runs a 5-stage Claude pipeline
+		over it, using tree-sitter to understand the code structure. Findings
+		export as SARIF, so they drop into the tools teams already use.
+	</p>
+
+	<h2>Shipped</h2>
+	<ul>
+		<li>Public repo with macOS <code>.dmg</code> releases (v1.0 to v1.2).</li>
+		<li>Rust backend (Tauri v2) with a SvelteKit UI.</li>
+	</ul>
+</ProjectLayout>

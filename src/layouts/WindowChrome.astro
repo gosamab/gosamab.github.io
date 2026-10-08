@@ -1,0 +1,68 @@
+---
+interface Props {
+	filename?: string;
+	maxWidth?: string;
+	className?: string;
+}
+
+const { filename = "untitled.mdx", maxWidth = "max-w-5xl", className = "" } =
+	Astro.props;
+---
+
+<div
+	class={`mx-auto ${maxWidth} px-3 sm:px-6 py-6 sm:py-10 ${className}`}
+	data-static-window
+>
+	<div class="window">
+		<div class="window-titlebar">
+			<div class="window-traffic">
+				<button
+					type="button"
+					class="dot dot-red"
+					data-static-action="close"
+					aria-label="Close"
+				></button>
+				<button
+					type="button"
+					class="dot dot-amber"
+					data-static-action="minimize"
+					aria-label="Minimize"
+				></button>
+				<button
+					type="button"
+					class="dot dot-green"
+					data-static-action="maximize"
+					aria-label="Maximize"
+				></button>
+			</div>
+			<div class="window-title">
+				<span>{filename}</span>
+			</div>
+			<div class="window-title-spacer" aria-hidden="true"></div>
+		</div>
+		<div class="window-body">
+			<slot />
+		</div>
+	</div>
+</div>
+
+<script>
+	document
+		.querySelectorAll<HTMLButtonElement>("[data-static-action]")
+		.forEach((btn) => {
+			btn.addEventListener("click", (e) => {
+				e.preventDefault();
+				const action = btn.dataset.staticAction;
+				const wrap = btn.closest("[data-static-window]") as HTMLElement | null;
+				if (!wrap) return;
+				if (action === "close" || action === "minimize") {
+					wrap.classList.add("static-window-closing");
+					setTimeout(() => {
+						window.location.href = "/";
+					}, 180);
+				} else if (action === "maximize") {
+					wrap.classList.toggle("static-window-maximized");
+				}
+			});
+		});
+</script>

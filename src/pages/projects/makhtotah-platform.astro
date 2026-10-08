@@ -1,0 +1,68 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Makhtotah Platform",
+	tagline:
+		"AI-powered search engine for Arabic historical documents. The applied half of the Makhtotah work.",
+	description:
+		"OCR-backed search and discovery layer over Arabic manuscript collections.",
+	status: "ongoing" as const,
+	startDate: "Dec 2024",
+	type: "product" as const,
+	role: "Solo developer",
+	team: "AthkaU Competition entry",
+	stack: ["Flask", "Azure Vision", "Python", "MongoDB"],
+	relatedProjects: [
+		{ slug: "makhtotah-research", title: "Makhtotah Research" },
+		{ slug: "arabic-ocr-hwr", title: "Arabic OCR/HWR with Qwen2" },
+	],
+	toc: [
+		{ id: "what-it-is", label: "What it is" },
+		{ id: "what-it-does", label: "What it does" },
+		{ id: "stack", label: "Why this stack" },
+		{ id: "where-its-going", label: "Where it's going" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="what-it-is">What it is</h2>
+	<p>
+		The product side of the Makhtotah work. Where the
+		<a href="/projects/makhtotah-research">research project</a>
+		is the model and methodology, the platform is the place an actual
+		researcher, librarian, or curious reader lands when they want to
+		<em>search</em> Arabic historical documents, not just OCR a single
+		page.
+	</p>
+	<p>
+		It started as an AthkaU Competition entry. The brief was simple: take
+		the OCR work and put it behind something a human can use.
+	</p>
+
+	<h2 id="what-it-does">What it does</h2>
+	<ul>
+		<li>Upload or browse digitized manuscript pages.</li>
+		<li>OCR each page (Azure Vision in v1, with the custom pipeline coming in).</li>
+		<li>Index the recognized text with manuscript metadata (era, condition, calligraphic style).</li>
+		<li>Full-text search across the corpus, returning page-level matches with the original image alongside.</li>
+	</ul>
+
+	<h2 id="stack">Why this stack</h2>
+	<p>
+		Flask because it stays out of the way; Azure Vision because it gave a
+		usable v1 OCR baseline before the custom Makhtotah model was ready;
+		MongoDB because manuscript metadata is irregular by nature and a
+		document store maps cleanly to that. None of these are forever
+		decisions: the architecture is built to swap the OCR engine without
+		touching the search and UI layers.
+	</p>
+
+	<h2 id="where-its-going">Where it's going</h2>
+	<ul>
+		<li>Replace Azure Vision with the custom OCR model from Makhtotah Research, on the historical-manuscript slice where commercial APIs lose.</li>
+		<li>Add calligraphic-style filtering to search.</li>
+		<li>Surface confidence per region, so researchers can flag low-confidence transcriptions instead of trusting them blindly.</li>
+	</ul>
+</ProjectLayout>

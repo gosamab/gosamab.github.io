@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+import DesktopIcon from "../components/DesktopIcon.astro";
+
+const projects = [
+	{ href: "/projects/open-security", label: "open-security.mdx" },
+	{ href: "/projects/policy-rag-agent", label: "policy-rag-agent.mdx" },
+	{ href: "/projects/readmissions-ml", label: "readmissions-ml.mdx" },
+	{ href: "/projects/n8n-lead-capture", label: "n8n-lead-capture.mdx" },
+	{ href: "/projects/financer", label: "financer.mdx" },
+	{ href: "/projects/prayer-mat", label: "prayer-mat.mdx" },
+	{ href: "/projects/ayat-qurania", label: "ayat-qurania.mdx" },
+	{ href: "/projects/content-creator", label: "content-creator.mdx" },
+	{ href: "/projects/shai", label: "shai.mdx" },
+	{ href: "/projects/makhtotah-research", label: "makhtotah-research.mdx" },
+	{ href: "/projects/makhtotah-platform", label: "makhtotah-platform.mdx" },
+	{ href: "/projects/arabic-ocr-hwr", label: "arabic-ocr-hwr.mdx" },
+	{ href: "/projects/sahraai", label: "sahraai.mdx" },
+];
+---
+
+<BaseLayout title="Projects | Osama Azab">
+	<WindowChrome filename="projects/" maxWidth="max-w-3xl">
+		<div class="folder-view">
+			{
+				projects.map((p) => (
+					<DesktopIcon href={p.href} label={p.label} type="doc" />
+				))
+			}
+		</div>
+	</WindowChrome>
+</BaseLayout>

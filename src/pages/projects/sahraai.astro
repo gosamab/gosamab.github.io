@@ -1,0 +1,78 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "SahraAI",
+	tagline:
+		"Joinable-table discovery and intent-driven enrichment over heterogeneous data lakes.",
+	description:
+		"A data discovery system that goes past finding tables: it actually populates new attributes into the base dataset at row level, with provenance.",
+	status: "in-progress" as const,
+	startDate: "2025",
+	type: "research" as const,
+	role: "Technical implementer",
+	team: "Team project (members credited later); reviewed with Dr. Omar Alomair",
+	stack: ["Python", "PostgreSQL", "Embeddings", "LLMs"],
+	links: {
+		repo: "https://github.com/gosamab/sahra",
+	},
+	relatedProjects: [
+		{ slug: "makhtotah-research", title: "Makhtotah Research" },
+		{ slug: "arabic-ocr-hwr", title: "OCR/HWR, Qwen2" },
+	],
+	toc: [
+		{ id: "the-problem", label: "The problem" },
+		{ id: "what-makes-it-different", label: "What makes it different" },
+		{ id: "method", label: "Method" },
+		{ id: "where-it-fits", label: "Where it fits" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="the-problem">The problem</h2>
+	<p>
+		Data lakes are full of structured, semi-structured, and unstructured
+		datasets sitting in raw form. The hard part isn't storing them; it's
+		<em>finding</em> the ones that meaningfully extend a dataset you already
+		have. Existing work is split across <strong>joinable</strong>
+		discovery (JOSIE-style overlap search) and <strong>unionable</strong>
+		discovery (DUST-style novelty maximization): both stop at retrieval.
+	</p>
+
+	<h2 id="what-makes-it-different">What makes it different</h2>
+	<p>
+		SahraAI targets the gap between <em>discovery</em> and <em>enrichment</em>.
+		The deliverable isn't "here are 10 candidate tables", it's "here is
+		your base dataset with new attributes populated at the row level, with
+		provenance and confidence." Discovery, schema normalization, candidate
+		join inference, and value population live in one pipeline.
+	</p>
+
+	<h2 id="method">Method</h2>
+	<p>
+		Each candidate relation in the lake is scored by a utility function
+		<code>S(Q, R) = 0.4C + 0.3R + 0.2P + 0.1N</code>:
+	</p>
+	<ul>
+		<li><strong>Coverage (C)</strong>: how much of the query table the join actually matches.</li>
+		<li><strong>Semantic Relevance (R)</strong>: embedding/ontology/LLM similarity over join attributes.</li>
+		<li><strong>Plausibility (P)</strong>: joined tuples that obey unit and domain constraints.</li>
+		<li><strong>Novelty (N)</strong>: values <em>R</em> introduces beyond what <em>Q</em> already contains.</li>
+	</ul>
+	<p>
+		The pipeline minimizes physical access to lake tables by leaning on
+		metadata-driven similarity (schemas, statistics, sketches) and only
+		reaching into a bounded candidate subset when it has to.
+	</p>
+
+	<h2 id="where-it-fits">Where it fits</h2>
+	<p>
+		Builds on the conceptual frame from Nargesian et al. (data lake
+		management as on-demand query answering) and Fan et al.'s table
+		discovery taxonomy; complements JOSIE (joinable retrieval at scale)
+		and DUST (novelty-driven unionable retrieval). The contribution is in
+		not stopping at retrieval, turning discovery into a usable enriched
+		dataset ready for downstream modeling.
+	</p>
+</ProjectLayout>

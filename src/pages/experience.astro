@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+
+const experience = [
+	{
+		role: "Software Engineer, Junior to Senior",
+		org: "Insurance technology company",
+		dates: "Dec 2016 - Present",
+		place: "Riyadh",
+		intro:
+			"I started as a junior developer and grew into a senior role on the team that builds the systems behind online insurance in Saudi Arabia. Most of what I do is the unglamorous, high-stakes part: APIs and integrations that have to be right, because real policies and real payments go through them.",
+		points: [
+			"Build .NET Web APIs, integration services and web portals for motor, medical and visit-visa insurance, from quotation to policy issuance, payment and renewal.",
+			"Integrate with insurers, aggregators and Saudi government services (vehicle-accident data, national ID verification, social-insurance inquiries) over SOAP and REST.",
+			"Wrote the payment callback handling for SADAD payment integrations.",
+			"Develop on and diagnose SQL Server behind high-traffic systems: execution plans, index tuning, slow queries, blocking and deadlocks. Also Oracle and PostgreSQL.",
+			"Top committer on the team, with about 7,400 commits since 2019.",
+		],
+		stack: "ASP.NET, .NET 6-8, SQL Server, Oracle, RabbitMQ, Hangfire, Serilog, Azure DevOps",
+	},
+	{
+		role: "AI Engineering Co-op",
+		org: "Saudi health-insurance regulator",
+		dates: "Jul 2025 - Dec 2025",
+		place: "Riyadh",
+		intro:
+			"Six months in a Data and AI department, taking real data from messy tables to working systems that non-technical staff could use. This is where my AI work moved from side projects to production-shaped systems.",
+		points: [
+			"Built an agentic RAG assistant over internal policy documents, with guardrails, tracing and cited sources.",
+			"Built readmissions scoring and forecasting on about 650K claims, with an Airflow pipeline and Power BI dashboards.",
+			"Built n8n agent POCs with Ollama: a daily news digest, compliance logs to Jira tickets, and a multi-agent orchestrator.",
+		],
+		links: [
+			{ href: "/projects/policy-rag-agent", label: "Policy RAG Agent" },
+			{ href: "/projects/readmissions-ml", label: "Readmissions ML Pipeline" },
+		],
+		stack: "LangGraph, Qdrant, Docling, NeMo Guardrails, Langfuse, LightGBM, Spark, Airflow, Power BI, n8n",
+	},
+];
+---
+
+<BaseLayout title="Experience | Osama Azab">
+	<WindowChrome filename="experience.mdx" maxWidth="max-w-3xl">
+		<section class="px-6 pt-16 pb-10">
+			<p class="section-label mb-3">Experience and education</p>
+			<h1 class="text-4xl font-semibold mb-3">Where I've worked and studied.</h1>
+			<p class="text-stone-600 leading-relaxed">
+				Ten years of shipping .NET systems for insurance, a co-op that put
+				AI into a regulator's daily work, and a computer science degree
+				finished with first honors.
+			</p>
+		</section>
+
+		<section class="px-6 py-10 border-t border-stone-200">
+			<h2 class="text-2xl font-semibold mb-8">Experience</h2>
+			<div class="space-y-12">
+				{
+					experience.map((e) => (
+						<div>
+							<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-1">
+								<h3 class="font-serif text-xl font-semibold">{e.role}</h3>
+								<span class="font-mono text-sm text-stone-500 shrink-0">{e.dates}</span>
+							</div>
+							<p class="text-stone-500 text-sm mb-4">
+								{e.org}, {e.place}
+							</p>
+							<p class="text-stone-700 leading-relaxed mb-4">{e.intro}</p>
+							<ul class="space-y-2 text-stone-700 list-disc pl-5 mb-4">
+								{e.points.map((p) => (
+									<li class="leading-relaxed">{p}</li>
+								))}
+							</ul>
+							{e.links && (
+								<p class="text-sm mb-2 flex flex-wrap gap-x-4">
+									{e.links.map((l) => (
+										<a href={l.href} class="text-amber-700 hover:text-amber-900 transition">
+											{l.label} →
+										</a>
+									))}
+								</p>
+							)}
+							<p class="font-mono text-xs text-stone-500 leading-relaxed">{e.stack}</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="px-6 py-10 border-t border-stone-200 pb-20">
+			<h2 class="text-2xl font-semibold mb-8">Education</h2>
+			<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-1">
+				<h3 class="font-serif text-xl font-semibold">B.Sc. in Computer Science</h3>
+				<span class="font-mono text-sm text-stone-500 shrink-0">Aug 2021 - Dec 2025</span>
+			</div>
+			<p class="text-stone-500 text-sm mb-4">Prince Sultan University, Riyadh. First honors.</p>
+			<p class="text-stone-700 leading-relaxed mb-4">
+				I did the degree alongside my job, so the theory had somewhere to go
+				right away. The courses that shaped my work most were NLP, data
+				science, distributed systems, databases and algorithms.
+			</p>
+			<ul class="space-y-2 text-stone-700 list-disc pl-5">
+				<li class="leading-relaxed">
+					Senior project:
+					<a href="/projects/makhtotah-research" class="text-amber-700 hover:text-amber-900 transition">Makhtotah</a>,
+					Arabic manuscript OCR with deep learning and hybrid binarization.
+				</li>
+				<li class="leading-relaxed">
+					1st place nationally at ACM Programming Jam X, and 6th in Saudi
+					Arabia at IEEE Xtreme 18.0. More on the
+					<a href="/credentials" class="text-amber-700 hover:text-amber-900 transition">credentials</a> page.
+				</li>
+			</ul>
+		</section>
+	</WindowChrome>
+</BaseLayout>

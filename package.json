@@ -1,0 +1,27 @@
+{
+	"name": "osama-portfolio",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@iconify-json/flat-color-icons": "^1.2.3",
+		"@iconify-json/lucide": "^1.2.105",
+		"@iconify-json/simple-icons": "^1.2.80",
+		"@tailwindcss/vite": "^4.2.4",
+		"astro": "^6.1.10",
+		"astro-icon": "^1.1.5",
+		"tailwindcss": "^4.2.4"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.9",
+		"typescript": "^5.9.3"
+	},
+	"overrides": {
+		"vite": "^7.3.2"
+	}
+}

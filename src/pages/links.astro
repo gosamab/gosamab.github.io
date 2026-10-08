@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+import DesktopIcon from "../components/DesktopIcon.astro";
+
+const items = [
+	{
+		href: "https://github.com/gosamab",
+		label: "github",
+		type: "link" as const,
+		external: true,
+	},
+	{
+		href: "https://linkedin.com/in/gosamab",
+		label: "linkedin",
+		type: "link" as const,
+		external: true,
+	},
+	{
+		href: "mailto:gosamab@hotmail.com",
+		label: "email",
+		type: "link" as const,
+		external: true,
+	},
+	{
+		href: "https://wa.me/966534832267",
+		label: "whatsapp",
+		type: "link" as const,
+		external: true,
+	},
+];
+---
+
+<BaseLayout title="Links | Osama Azab">
+	<WindowChrome filename="links/" maxWidth="max-w-2xl">
+		<div class="folder-view">
+			{items.map((item) => <DesktopIcon {...item} />)}
+		</div>
+	</WindowChrome>
+</BaseLayout>

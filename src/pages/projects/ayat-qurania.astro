@@ -1,0 +1,27 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Ayat Qurania",
+	tagline: "A Quran audio player in Arabic and English, live on the App Store.",
+	description: "Ayat Qurania: a bilingual Flutter Quran audio player for iOS, live on the App Store.",
+	status: "shipped" as const,
+	startDate: "2026",
+	type: "product" as const,
+	role: "Solo",
+	stack: ["Flutter", "Dart"],
+	links: {
+		appStore: "https://apps.apple.com/app/id6762133055",
+	},
+	relatedProjects: [{ slug: "prayer-mat", title: "Prayer Mat" }],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>What it does</h2>
+	<p>
+		Ayat Qurania (أيات قرآنية) plays Quran recitations with an Arabic and
+		English interface. It's built in Flutter and released on the App Store
+		(version 1.2).
+	</p>
+</ProjectLayout>

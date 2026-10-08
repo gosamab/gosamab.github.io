@@ -1,0 +1,84 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "shai",
+	tagline:
+		"Natural-language shell with typed slot filling. The model never touches your filesystem; you do.",
+	description:
+		"Type plain English; shai asks the model for a structured command spec, walks you through typed parameter slots, confirms once, then runs.",
+	status: "in-progress" as const,
+	startDate: "2026",
+	type: "tooling" as const,
+	role: "Solo",
+	stack: ["Rust", "Anthropic API"],
+	links: {
+		repo: "https://github.com/gosamab/shai",
+	},
+	relatedProjects: [
+		{ slug: "open-security", title: "Open Security" },
+		{ slug: "content-creator", title: "Content Creator" },
+	],
+	toc: [
+		{ id: "what-it-does", label: "What it does" },
+		{ id: "why-slot-filling", label: "Why slot filling" },
+		{ id: "the-keys", label: "Confirmation keys" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="what-it-does">What it does</h2>
+	<p>
+		Type a request in plain English. shai asks the model for a
+		<em>structured</em> command, not a string, then walks you through
+		filling typed parameter slots, confirms once, and runs it. The
+		model never touches your filesystem; you do.
+	</p>
+	<pre><code class="text-sm">$ shai "find rust files modified in the last day"
+
+Description:  Find files matching a name pattern, modified within a time window
+🍵  find {`{path}`} -name '*.rs' -mtime -{`{days}`}
+
+> Where to search: .
+> Days: 1
+
+🍵  find . -name '*.rs' -mtime -1
+[Enter] run   [e] edit   [?] explain   [q] abort</code></pre>
+
+	<h2 id="why-slot-filling">Why slot filling</h2>
+	<p>
+		shai asks the model for a <em>typed spec</em> (<code>path</code>,
+		<code>number</code>, <code>select</code>, <code>path-must-exist</code>)
+		and elicits each slot with the right widget instead of handing you
+		a raw command string to edit free-form. Two safety wins:
+	</p>
+	<ul>
+		<li>
+			<strong>Destructive commands get an extra gate.</strong> A typed
+			<code>yes</code> is required for <code>rm</code>, <code>dd</code>,
+			<code>kill</code>, etc., with no Enter shortcut.
+		</li>
+		<li>
+			<strong>Missing env vars are caught before execution.</strong> If
+			the spec references <code>$AWS_PROFILE</code> and it isn't set,
+			shai blocks the run.
+		</li>
+	</ul>
+
+	<h2 id="the-keys">Confirmation keys</h2>
+	<p>After slot fill, shai shows the rendered command and a single-keystroke prompt.</p>
+	<ul>
+		<li><code>Enter</code> / <code>y</code>: run</li>
+		<li><code>e</code>: open <code>$EDITOR</code> on the rendered command, then re-confirm</li>
+		<li><code>?</code>: show description, warnings, reasoning; re-prompt</li>
+		<li><code>q</code> / <code>n</code> / <code>Esc</code> / <code>Ctrl+C</code>: abort</li>
+	</ul>
+	<p>
+		Beyond the basic flow, shai has <code>chat</code> (multi-turn REPL),
+		<code>explain</code> (command → plain English), <code>install</code>
+		(shell binding so <code>Alt+Enter</code> invokes shai on the current
+		line), <code>history</code>, and pipe-friendly stdin mode (e.g.
+		<code>git diff | shai "commit msg"</code>).
+	</p>
+</ProjectLayout>

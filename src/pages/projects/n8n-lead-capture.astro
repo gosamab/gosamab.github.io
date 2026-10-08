@@ -1,0 +1,37 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "n8n AI Lead Capture",
+	tagline:
+		"A web form feeds an n8n workflow that scores each lead with an LLM, drafts a reply and alerts you on hot leads.",
+	description:
+		"An n8n workflow that scores leads with an LLM, logs them to a Google Sheet CRM and sends Gmail alerts for hot leads.",
+	status: "shipped" as const,
+	startDate: "2026",
+	type: "product" as const,
+	role: "Automation design and build",
+	stack: ["n8n", "Anthropic API", "Google Sheets", "Gmail"],
+	links: {
+		demo: "https://youtu.be/SOm5txaL9L4",
+	},
+	relatedProjects: [{ slug: "open-security", title: "Open Security" }],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>How it works</h2>
+	<ol>
+		<li>A web form posts the lead to an n8n webhook.</li>
+		<li>An LLM scores the lead from 0 to 100 and drafts a reply.</li>
+		<li>The lead, score and draft are logged to a Google Sheet CRM.</li>
+		<li>Hot leads trigger a Gmail alert right away.</li>
+	</ol>
+
+	<h2>Demo</h2>
+	<p>
+		The 2-minute <a href="https://youtu.be/SOm5txaL9L4" target="_blank" rel="noopener noreferrer">demo video</a>
+		shows a hot lead scoring 88 and a cold lead scoring 12, both landing in
+		the sheet.
+	</p>
+</ProjectLayout>

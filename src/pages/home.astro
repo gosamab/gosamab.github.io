@@ -1,0 +1,239 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+const featuredProjects = [
+	{
+		title: "Open Security",
+		description:
+			"Desktop app that runs a 5-stage Claude pipeline to find security issues in code. Public, with releases.",
+		href: "/projects/open-security",
+		tags: ["Rust", "Tauri", "Claude"],
+	},
+	{
+		title: "Policy RAG Agent",
+		description:
+			"Agentic RAG over internal policy documents for a Saudi health-insurance regulator, with guardrails and tracing.",
+		href: "/projects/policy-rag-agent",
+		tags: ["LangGraph", "Qdrant", "RAG"],
+	},
+	{
+		title: "Readmissions ML Pipeline",
+		description:
+			"LightGBM scoring on about 650K claims, forecasts, an Airflow + Spark pipeline and Power BI dashboards.",
+		href: "/projects/readmissions-ml",
+		tags: ["LightGBM", "Airflow", "Spark"],
+	},
+	{
+		title: "n8n AI Lead Capture",
+		description:
+			"An LLM scores each lead, drafts a reply, logs it to a sheet CRM and alerts you on hot leads.",
+		href: "/projects/n8n-lead-capture",
+		tags: ["n8n", "LLM", "Automation"],
+	},
+	{
+		title: "Financer",
+		description:
+			"My own accounting app: .NET 8 double-entry ledger, Vue 3, iOS and an MCP server for AI assistants.",
+		href: "/projects/financer",
+		tags: [".NET 8", "PostgreSQL", "MCP"],
+	},
+	{
+		title: "Prayer Mat",
+		description:
+			"Flutter prayer tracker, live on the App Store and rated 5.0 in Saudi Arabia.",
+		href: "/projects/prayer-mat",
+		tags: ["Flutter", "iOS"],
+	},
+];
+---
+
+<BaseLayout title="Osama Azab | AI Engineer & .NET Developer">
+	<WindowChrome filename="home.mdx">
+		<!-- Hero -->
+		<section class="max-w-3xl mx-auto px-6 pt-20 pb-16">
+			<p class="section-label mb-4">Riyadh, Saudi Arabia</p>
+			<h1 class="text-5xl sm:text-6xl font-semibold tracking-tight mb-6">
+				Hi, I'm Osama.
+			</h1>
+			<p class="text-xl text-stone-700 leading-relaxed mb-4">
+				I'm an AI engineer and .NET developer. I add AI to the systems
+				businesses already run: assistants that answer from your own data and
+				documents, agents that automate real workflows, and the APIs that
+				connect them safely.
+			</p>
+			<p class="text-lg text-stone-600 leading-relaxed">
+				10 years building .NET APIs and integrations for enterprise insurance
+				platforms in Saudi Arabia. B.Sc. in Computer Science from Prince
+				Sultan University. Arabic native, English fluent.
+				<a href="/experience" class="underline decoration-amber-700 underline-offset-2 hover:text-amber-700 transition">My experience</a>.
+			</p>
+		</section>
+
+		<!-- What I do -->
+		<section
+			id="work"
+			class="max-w-3xl mx-auto px-6 py-20 border-t border-stone-200"
+		>
+			<p class="section-label mb-3">What I do</p>
+			<h2 class="text-3xl font-semibold mb-10">Three things, done well.</h2>
+
+			<div class="space-y-10">
+				<div>
+					<h3 class="font-serif text-xl font-semibold mb-2">
+						AI agents and RAG
+					</h3>
+					<p class="text-stone-600 leading-relaxed">
+						Assistants that answer from your documents and cite their
+						sources, agents that take real actions, and
+						<a href="/projects/policy-rag-agent" class="underline decoration-amber-700 underline-offset-2 hover:text-amber-700 transition">production-shaped RAG</a>
+						with guardrails and tracing. LangChain, LangGraph, Qdrant,
+						Langfuse, the Anthropic and OpenAI APIs, MCP servers and n8n.
+					</p>
+				</div>
+
+				<div>
+					<h3 class="font-serif text-xl font-semibold mb-2">
+						.NET APIs and integrations
+					</h3>
+					<p class="text-stone-600 leading-relaxed">
+						Quotes, policies, payments and government-service
+						integrations for high-traffic insurance platforms. ASP.NET
+						Core, SQL Server, Oracle and PostgreSQL, SOAP and REST,
+						RabbitMQ and Hangfire. I also diagnose slow queries, blocking
+						and deadlocks under load.
+					</p>
+				</div>
+
+				<div>
+					<h3 class="font-serif text-xl font-semibold mb-2">
+						Apps and tools
+					</h3>
+					<p class="text-stone-600 leading-relaxed">
+						Products I build and ship myself: Open Security (AI code
+						scanner), Financer (accounting app with an MCP server), and
+						Prayer Mat and Ayat Qurania, both live on the App Store.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Selected projects -->
+		<section id="projects" class="max-w-5xl mx-auto px-6 py-20">
+			<div class="flex items-end justify-between mb-10">
+				<div>
+					<p class="section-label mb-3">Selected work</p>
+					<h2 class="text-3xl font-semibold">Recent projects.</h2>
+				</div>
+				<a
+					href="/projects"
+					class="hidden sm:inline-block text-sm text-amber-700 hover:text-amber-900 transition font-medium"
+					>See all →</a
+				>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{featuredProjects.map((project) => <ProjectCard {...project} />)}
+			</div>
+			<div class="mt-8 sm:hidden">
+				<a
+					href="/projects"
+					class="text-sm text-amber-700 hover:text-amber-900 transition font-medium"
+					>See all projects →</a
+				>
+			</div>
+		</section>
+
+		<!-- How I work -->
+		<section class="max-w-3xl mx-auto px-6 py-20 border-t border-stone-200">
+			<p class="section-label mb-3">How I work</p>
+			<h2 class="text-3xl font-semibold mb-8">Clear scope, early demo.</h2>
+			<ul class="space-y-3 text-stone-700 list-disc pl-5">
+				<li>A clear scope and a fixed price before any work starts.</li>
+				<li>A working demo early, so you see progress, not promises.</li>
+				<li>AI that cites its sources and respects user permissions.</li>
+				<li>A clean handover with docs.</li>
+			</ul>
+		</section>
+
+		<!-- Find me -->
+		<section
+			id="contact"
+			class="max-w-3xl mx-auto px-6 py-20 border-t border-stone-200"
+		>
+			<p class="section-label mb-3">Find me</p>
+			<h2 class="text-3xl font-semibold mb-8">Get in touch.</h2>
+
+			<dl class="space-y-3 text-stone-700">
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">Email</dt>
+					<dd>
+						<a
+							href="mailto:gosamab@hotmail.com"
+							class="hover:text-amber-700 transition"
+							>gosamab@hotmail.com</a
+						>
+					</dd>
+				</div>
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">Phone</dt>
+					<dd>
+						<a
+							href="tel:+966534832267"
+							class="hover:text-amber-700 transition"
+							>+966 534 832 267</a
+						>
+					</dd>
+				</div>
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">WhatsApp</dt>
+					<dd>
+						<a
+							href="https://wa.me/966534832267"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-amber-700 transition"
+							>+966 534 832 267</a
+						>
+					</dd>
+				</div>
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">LinkedIn</dt>
+					<dd>
+						<a
+							href="https://linkedin.com/in/gosamab"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-amber-700 transition"
+							>linkedin.com/in/gosamab</a
+						>
+					</dd>
+				</div>
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">GitHub</dt>
+					<dd>
+						<a
+							href="https://github.com/gosamab"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-amber-700 transition"
+							>github.com/gosamab</a
+						>
+					</dd>
+				</div>
+				<div class="grid grid-cols-[5rem_1fr] gap-4">
+					<dt class="font-mono text-sm text-stone-500 pt-0.5">CV</dt>
+					<dd>
+						<a
+							href="/CV.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-amber-700 transition"
+							>Download PDF</a
+						>
+					</dd>
+				</div>
+			</dl>
+		</section>
+	</WindowChrome>
+</BaseLayout>

@@ -1,0 +1,183 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Makhtotah Research",
+	tagline:
+		"Improving OCR accuracy on Arabic historical manuscripts using deep learning and classical binarization techniques.",
+	description:
+		"Senior graduation project at Prince Sultan University on Arabic manuscript OCR.",
+	status: "ongoing" as const,
+	startDate: "Aug 2024",
+	endDate: "Dec 2025",
+	type: "research" as const,
+	role: "Researcher, lead implementer",
+	team: "Solo (advised by faculty)",
+	stack: [
+		"Python",
+		"PyTorch",
+		"TensorFlow",
+		"OpenCV",
+		"scikit-image",
+		"MongoDB",
+	],
+	links: {
+		repo: "https://github.com/gosamab/makhtotah-research",
+	},
+	highlights: [
+		{ value: "−30%", label: "CER vs commercial baselines" },
+		{ value: "4", label: "binarization methods compared" },
+		{ value: "3", label: "model architectures evaluated" },
+	],
+	toc: [
+		{ id: "why-it-exists", label: "Why it exists" },
+		{ id: "what-i-built", label: "What I built" },
+		{ id: "methodology", label: "Methodology" },
+		{ id: "evaluation", label: "Evaluation" },
+		{ id: "hard-parts", label: "Hard parts" },
+		{ id: "results", label: "Results" },
+		{ id: "limitations", label: "Limitations & future work" },
+		{ id: "what-i-learned", label: "What I learned" },
+		{ id: "acknowledgments", label: "Acknowledgments" },
+	],
+	relatedProjects: [
+		{ slug: "makhtotah-platform", title: "Makhtotah Platform" },
+		{ slug: "arabic-ocr-hwr", title: "Arabic OCR/HWR with Qwen2" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2 id="why-it-exists">Why it exists</h2>
+	<p>
+		Arabic historical manuscripts are an underserved corner of OCR. Modern
+		Arabic OCR works reasonably well on clean printed text; on
+		century-or-older manuscripts it falls apart. Documents are degraded,
+		calligraphic styles vary wildly, diacritics are inconsistent, and labelled
+		training data barely exists. Commercial OCR engines either skip Arabic
+		historical content entirely or produce output that's worse than nothing.
+	</p>
+	<p>
+		This is my senior graduation project at Prince Sultan University. The goal
+		is a system that meaningfully reduces character error rate on Arabic
+		manuscript pages, with a methodology that's reproducible and a dataset
+		that's reusable beyond this project.
+	</p>
+
+	<h2 id="what-i-built">What I built</h2>
+	<p>
+		An end-to-end pipeline: collected and annotated dataset → preprocessing
+		stack (binarization, denoising, skew correction, line segmentation) → text
+		recognition model → evaluation framework. Each stage is swappable, so the
+		ablations are real ablations rather than rerunning a black box with
+		different inputs.
+	</p>
+	<ul>
+		<li>A hybrid binarization scheme that combines Otsu, Sauvola, and Niblack adaptively</li>
+		<li>An attention mechanism tuned for Arabic connected script</li>
+		<li>A linguistic post-processor that corrects context-plausible errors</li>
+		<li>A reusable evaluation harness reporting CER, WER, F1 at character and word level</li>
+	</ul>
+
+	<h2 id="methodology">Methodology</h2>
+
+	<h3>Dataset</h3>
+	<p>
+		Pulled from digital archives, scanned library collections, and synthetic
+		augmentation. Annotation is line-level transcription with manuscript
+		category metadata (era, condition, calligraphic style). Stored in
+		MongoDB so I can slice evaluation by category later.
+	</p>
+
+	<h3>Preprocessing</h3>
+	<p>Comprehensive pipeline before recognition:</p>
+	<ul>
+		<li>Adaptive binarization: Otsu, Sauvola, Niblack, plus a hybrid combiner</li>
+		<li>Noise reduction and stain filtering</li>
+		<li>Skew correction and normalization</li>
+		<li>Text-line segmentation with margin-aware heuristics</li>
+		<li>Image enhancement specific to Arabic script characteristics</li>
+	</ul>
+
+	<h3>Models</h3>
+	<p>Three architectures compared on the same preprocessing pipeline:</p>
+	<ul>
+		<li>CNN-RNN hybrid with attention: strong baseline</li>
+		<li>Transformer-based recognizer: best on clean text, struggles on degraded</li>
+		<li>Custom architecture tuned for Arabic ligatures and diacritics: best overall</li>
+	</ul>
+
+	<h2 id="evaluation">Evaluation</h2>
+	<p>
+		Reported metrics: Character Error Rate (CER), Word Error Rate (WER),
+		precision/recall/F1 at character and word level, plus processing time.
+		Each model is evaluated on three slices: clean printed Arabic (control),
+		modern handwritten Arabic, and historical manuscript pages. The slice
+		split matters: averaging across all three hides the fact that the
+		degraded-historical slice is where most of the engineering work pays off.
+	</p>
+	<p>
+		Baselines: Tesseract (Arabic), Google Cloud Vision, Azure Read API. The
+		−30% CER number compares the custom architecture against the strongest
+		commercial baseline on the historical slice; on clean printed text the
+		commercial systems are competitive or better, which is fine. That's not
+		the problem this project is solving.
+	</p>
+
+	<h2 id="hard-parts">Hard parts</h2>
+	<p>
+		<strong>Annotation cost.</strong> Manuscript transcription requires
+		expertise; I can do some, but consistent annotation at scale needs help.
+		Synthetic data fills gaps but doesn't substitute for the long tail of
+		real-world degradation patterns.
+	</p>
+	<p>
+		<strong>Calligraphic variation.</strong> A model that nails one style
+		(Naskh) often regresses on another (Diwani, Thuluth). Ended up with a
+		style-conditioning input that improves the worst case without hurting the
+		best.
+	</p>
+	<p>
+		<strong>Evaluation honesty.</strong> Easy to overfit to the test set when
+		you're iterating fast. Locked a holdout slice early and only ran it at
+		decision points.
+	</p>
+
+	<h2 id="results">Results</h2>
+	<p>
+		On the historical-manuscript evaluation slice, the custom architecture
+		paired with the hybrid preprocessing pipeline reduces CER by roughly 30%
+		relative to the strongest commercial baseline. The improvement comes from
+		preprocessing more than from model choice. Once the binarization is
+		right, all three model architectures get noticeably better.
+	</p>
+	<p>
+		Beyond the headline number: the framework is what I'd reuse. Swapping in a
+		new model takes a couple of days, not weeks, because the dataset
+		organization, preprocessing options, and evaluation harness are all
+		already there.
+	</p>
+
+	<h2 id="limitations">Limitations & future work</h2>
+	<ul>
+		<li>Dataset breadth: more historical periods, more calligraphic styles, more annotators</li>
+		<li>Self-supervised pretraining on unlabelled scans: there's a lot of unlabelled data sitting in archives</li>
+		<li>Few-shot adaptation for rare manuscript types instead of training from scratch each time</li>
+		<li>Tighter integration with the Makhtotah Platform for true end-to-end manuscript digitization</li>
+	</ul>
+
+	<h2 id="what-i-learned">What I learned</h2>
+	<ul>
+		<li>Preprocessing is where the wins live for degraded-document OCR. Model architecture matters less than I expected.</li>
+		<li>An evaluation harness that splits by document category is worth building even before the first model. Aggregate metrics lie.</li>
+		<li>Synthetic data is great for rare characters, mediocre for rare degradation patterns. You can't simulate what aging actually does to ink.</li>
+		<li>Lock the holdout early. Future-me will thank present-me.</li>
+	</ul>
+
+	<h2 id="acknowledgments">Acknowledgments</h2>
+	<p>
+		Project supervised by faculty at Prince Sultan University. Thanks to the
+		colleagues who reviewed annotation samples for consistency, and to the
+		archives whose scanned collections made the dataset possible.
+	</p>
+</ProjectLayout>

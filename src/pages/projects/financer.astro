@@ -1,0 +1,47 @@
+---
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+const props = {
+	title: "Financer",
+	tagline:
+		"A close-first personal accounting app on a double-entry ledger, with an MCP server so AI assistants can work with it.",
+	description:
+		"Financer: a .NET 8 modular monolith with double-entry accounting, a Vue 3 web app, an iOS app and an MCP server.",
+	status: "in-progress" as const,
+	startDate: "2025",
+	type: "product" as const,
+	role: "Solo",
+	stack: [".NET 8", "PostgreSQL", "EF Core", "Vue 3", "Expo", "MCP"],
+	links: {
+		demo: "https://youtu.be/Z30krHh8LsM",
+	},
+	relatedProjects: [
+		{ slug: "open-security", title: "Open Security" },
+		{ slug: "prayer-mat", title: "Prayer Mat" },
+	],
+};
+---
+
+<ProjectLayout {...props}>
+	<h2>What it is</h2>
+	<p>
+		Financer is my own accounting app. Statements come in, you answer a
+		short review queue, and month-end close reconciles every account to
+		the bank. Underneath is a real double-entry general ledger.
+	</p>
+
+	<h2>How it's built</h2>
+	<ul>
+		<li>.NET 8 modular monolith with DDD, CQRS and MediatR, on PostgreSQL.</li>
+		<li>Vue 3 web app and an Expo iOS app.</li>
+		<li>An MCP server so Claude can read balances and reports and record transactions.</li>
+		<li>Version 2 is a rebuild with EF Core, OIDC sign-in and tests.</li>
+	</ul>
+
+	<h2>Explainer</h2>
+	<p>
+		A 60-second <a href="https://youtu.be/Z30krHh8LsM" target="_blank" rel="noopener noreferrer">product explainer</a>
+		built from animated recreations of the real screens. All on-screen
+		data is mock data.
+	</p>
+</ProjectLayout>

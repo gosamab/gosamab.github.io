@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WindowChrome from "../layouts/WindowChrome.astro";
+
+const path = Astro.url.pathname;
+---
+
+<BaseLayout
+	title="File not found | Osama Azab"
+	description="The page you tried to open doesn't exist."
+>
+	<WindowChrome filename="404.txt" maxWidth="max-w-2xl">
+		<div class="win-notfound">
+			<svg
+				class="win-notfound-icon"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+				<path d="M14 3v5h5" />
+				<path d="M9 14l4 4M13 14l-4 4" />
+			</svg>
+			<strong class="win-notfound-title">File not found</strong>
+			<p class="win-notfound-path">{path}</p>
+			<p class="win-notfound-note">Couldn't find anything at that path.</p>
+			<a class="win-notfound-btn" href="/">← Back to desktop</a>
+		</div>
+	</WindowChrome>
+</BaseLayout>
