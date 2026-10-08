@@ -5,6 +5,8 @@ type IconType = "doc" | "folder" | "pdf" | "log" | "app" | "link" | "mov";
 
 interface Props {
 	href: string;
+	/** Opened by the desktop window manager instead of href. */
+	desktopHref?: string;
 	label: string;
 	type?: IconType;
 	external?: boolean;
@@ -15,6 +17,7 @@ interface Props {
 
 const {
 	href,
+	desktopHref,
 	label,
 	type = "doc",
 	external = false,
@@ -47,6 +50,7 @@ const ext = dot > 0 ? label.slice(dot) : "";
 	rel={external ? "noopener noreferrer" : undefined}
 	class="desktop-icon group"
 	data-desktop-icon
+	data-desktop-href={desktopHref}
 	data-icon-id={label}
 	data-default-side={side}
 	data-default-idx={idx}

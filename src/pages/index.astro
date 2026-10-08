@@ -8,7 +8,7 @@ const fileIcons = [
 	{ href: "/experience", label: "experience.mdx", type: "doc" as const },
 	{ href: "/credentials", label: "credentials.mdx", type: "doc" as const },
 	{ href: "/skills", label: "skills.mdx", type: "doc" as const },
-	{ href: "/CV.pdf", label: "cv.pdf", type: "pdf" as const, external: true },
+	{ href: "/cv", desktopHref: "/CV.pdf", label: "cv.pdf", type: "pdf" as const },
 ];
 
 const linkIcons = [
@@ -44,6 +44,17 @@ const linkIcons = [
 ---
 
 <BaseLayout title="Osama Azab | AI Engineer & .NET Developer">
+	<script is:inline>
+		// Phones skip the window manager, so land them on home.mdx. Arriving
+		// from inside the site (logo, close button) keeps the icon desktop.
+		(function () {
+			if (!window.matchMedia("(max-width: 767px)").matches) return;
+			try {
+				if (document.referrer && new URL(document.referrer).origin === location.origin) return;
+			} catch (e) {}
+			location.replace("/home");
+		})();
+	</script>
 	<div class="desktop" data-arrange-canvas>
 		{
 			fileIcons.map((icon, i) => (

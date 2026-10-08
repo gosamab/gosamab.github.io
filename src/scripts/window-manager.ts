@@ -496,7 +496,7 @@ export function bootDesktop(): void {
 	const wm = new WindowManager(root, menuList, menuWrap);
 
 	const intercept = (e: MouseEvent, a: HTMLAnchorElement): void => {
-		const href = a.getAttribute("href") ?? "";
+		const href = a.dataset.desktopHref ?? a.getAttribute("href") ?? "";
 		if (!href || href.startsWith("javascript:") || href === "#") return;
 		if (href.startsWith("mailto:") || href.startsWith("tel:")) return;
 		if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;

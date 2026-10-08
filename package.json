@@ -6,7 +6,8 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"cv:image": "pdftoppm -png -r 150 -singlefile public/CV.pdf public/cv"
 	},
 	"dependencies": {
 		"@iconify-json/flat-color-icons": "^1.2.3",
